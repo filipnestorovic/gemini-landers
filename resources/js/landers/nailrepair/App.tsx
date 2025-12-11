@@ -29,7 +29,6 @@ const App: React.FC = () => {
   const [showSticky, setShowSticky] = useState(false);
   const mainCtaRef = useRef<HTMLDivElement>(null);
 
-    // === PIXEL INICIJALIZACIJA I VIEW CONTENT ===
     useEffect(() => {
         // 1. Inicijalizuj Pixel (PageView)
         initPixel();
