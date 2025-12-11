@@ -34,7 +34,6 @@ const App: React.FC = () => {
         // 1. Inicijalizuj Pixel (PageView)
         initPixel();
 
-        // 2. Pošalji ViewContent event odmah po učitavanju
         trackEvent('ViewContent', {
             content_name: MEDEIVA_SERUM.name,
             content_type: 'product',
