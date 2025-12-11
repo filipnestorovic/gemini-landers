@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\OrderController;
 
-Route::get('/', function () {
-    return 'Hello World';
-});
+Route::get('/', [LandingController::class, 'home'])->name('home');
 
-Route::view('/nailrepair', 'landers.nailrepair');
+Route::get('/nailrepair', [LandingController::class, 'nailrepair'])->name('nailrepair');
 
-Route::post('/order', [App\Http\Controllers\OrderController::class, 'store'])->name('order.create');
+Route::post('/order', [OrderController::class, 'store'])->name('order.create');
