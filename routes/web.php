@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/nailrepair');
+Route::get('/', function () {
+    return 'Hello World';
+});
 
 Route::view('/nailrepair', 'landers.nailrepair');
 
