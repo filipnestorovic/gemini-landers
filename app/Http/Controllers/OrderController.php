@@ -53,7 +53,7 @@ class OrderController extends Controller
             $jsonArray['countryCode'] = 'RS';
             $jsonArray['currency'] = 'RSD';
 
-            if($request->freeShipping) {
+            if($request->freeShipping == 1) {
                 $jsonArray['shipping_lines'] = array([
                     "method_id" => "free_shipping"
                 ]);
