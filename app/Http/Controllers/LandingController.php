@@ -8,7 +8,7 @@ class LandingController extends Controller
 {
     public function home()
     {
-        return 'Hello World';
+        return view('landers.nailrepair');
     }
 
     public function nailrepair()
