@@ -30,7 +30,6 @@ const App: React.FC = () => {
   const mainCtaRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // 1. Inicijalizuj Pixel (PageView)
         initPixel();
 
         trackEvent('ViewContent', {
