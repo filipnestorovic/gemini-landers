@@ -39,7 +39,7 @@ class OrderController extends Controller
 
             $jsonArray = array();
 
-            $jsonArray['site'] = 'https://divinecareshop.com';
+            $jsonArray['site'] = 'https://medeiva.com';
 
             $jsonArray['number'] = null;
             $jsonArray['date_created'] = now();
@@ -53,7 +53,7 @@ class OrderController extends Controller
             $jsonArray['countryCode'] = 'RS';
             $jsonArray['currency'] = 'RSD';
 
-            if($request->freeShipping == 1) {
+            if($request->boolean('freeShipping')) {
                 $jsonArray['shipping_lines'] = array([
                     "method_id" => "free_shipping"
                 ]);
