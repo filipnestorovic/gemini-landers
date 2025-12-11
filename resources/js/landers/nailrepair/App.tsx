@@ -42,7 +42,6 @@ const App: React.FC = () => {
             currency: MEDEIVA_SERUM.currency
         });
     }, []);
-    // ============================================
 
   useEffect(() => {
     const observer = new IntersectionObserver(
