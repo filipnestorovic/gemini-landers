@@ -11,7 +11,7 @@ use App\Http\Controllers\OrderController;
 //
 //Route::post('/order', [OrderController::class, 'store'])->name('order.create');
 
-Route::domain('repair.homecarshop.com')->group(function () {
+Route::domain('auto.homecarshop.com')->group(function () {
     Route::get('/', [LandingController::class, 'homecarshop'])->name('homecarshop');
     Route::get('/scratchrepair', [LandingController::class, 'scratchrepair'])->name('scratchrepair');
 });
