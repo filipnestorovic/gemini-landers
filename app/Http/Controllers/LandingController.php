@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
-    public function home()
+    public function homecarshop()
+    {
+        return view('landers.scratchrepair');
+    }
+
+    public function divinecareshop()
     {
         return view('landers.nailrepair');
     }
@@ -14,5 +19,10 @@ class LandingController extends Controller
     public function nailrepair()
     {
         return view('landers.nailrepair');
+    }
+
+    public function scratchrepair()
+    {
+        return view('landers.scratchrepair');
     }
 }

@@ -84,7 +84,7 @@ const App: React.FC = () => {
 
         try {
             const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || (window as any).csrf_token;
-            const targetRoute = (window as any).orderRoute || '/poruci';
+            const targetRoute = (window as any).orderRoute || '/order';
 
             const response = await fetch(targetRoute, {
                 method: 'POST',
