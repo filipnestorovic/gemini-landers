@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import '../../../css/app.css'; // Prilagodi putanju do tvog globalnog CSS-a ako je potrebno, ili obriši ako se učitava kroz Blade
+import '../../../css/app.css';
 
 const rootElement = document.getElementById('scratchrepair-root');
 

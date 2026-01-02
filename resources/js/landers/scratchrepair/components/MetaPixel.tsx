@@ -21,7 +21,7 @@ export const MetaPixel: React.FC<MetaPixelProps> = ({ pixelId }) => {
             return;
         }
 
-        const isPlaceholder = cleanedId.includes("YOUR_PIXEL_ID");
+        const isPlaceholder = cleanedId.includes("1016213196582153");
         if (isPlaceholder) {
             console.info("ℹ️ Meta Pixel: Stranica koristi 'placeholder' ID. Script će se učitati, ali podaci neće stizati u vaš Meta Dashboard dok ne unesete pravi ID u constants.ts.");
         }
