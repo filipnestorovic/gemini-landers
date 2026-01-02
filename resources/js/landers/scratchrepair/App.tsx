@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
@@ -15,15 +15,14 @@ import { ShieldCheck, Truck, Star, CheckCircle2, ArrowDown } from 'lucide-react'
 export default function App() {
     const [orderPlaced, setOrderPlaced] = useState(false);
 
-    // Track Purchase when order is successful
-    useEffect(() => {
-        if (orderPlaced) {
-            trackPixelEvent('Purchase', {
-                currency: PRODUCT_SETTINGS.currency,
-                value: 0,
-            });
-        }
-    }, [orderPlaced]);
+    const handleOrderSuccess = (value: number) => {
+        setOrderPlaced(true);
+        // Trigger conversion event with dynamic order value
+        trackPixelEvent('Purchase', {
+            currency: PRODUCT_SETTINGS.currency,
+            value: value,
+        });
+    };
 
     return (
         <div className="min-h-screen flex flex-col overflow-x-hidden bg-slate-900">
@@ -38,9 +37,9 @@ export default function App() {
                     <div className="flex justify-center items-center gap-12 animate-marquee whitespace-nowrap text-white font-bold uppercase tracking-wider text-sm md:text-base">
                         <span className="flex items-center gap-2"><Truck size={18} /> Besplatna dostava za Mega Paket</span>
                         <span className="flex items-center gap-2"><ShieldCheck size={18} /> 100% Garancija zadovoljstva</span>
-                        <span className="flex items-center gap-2">Dostava u celoj Srbiji</span>
+                        <span className="flex items-center gap-2">🇷🇸 Dostava u celoj Srbiji</span>
                         <span className="flex items-center gap-2">💰 Plaćanje pouzećem</span>
-                        <span className="flex items-center gap-2"><Truck size={18} /> Dostava u roku 1-2 radna dana</span>
+                        <span className="flex items-center gap-2"><Truck size={18} /> Besplatna dostava za Mega Paket</span>
                     </div>
                 </div>
 
@@ -72,8 +71,8 @@ export default function App() {
                                                 display: 'inline-block'
                                             }}
                                         >
-                                      uštedite!
-                                    </span>
+                      uštedite!
+                    </span>
                                     </h2>
                                     <p className="text-lg text-slate-300 leading-relaxed">
                                         Iskoristite priliku dok traju zalihe. Scratch Repair je dostupan po akcijskoj ceni samo još kratko vreme.
@@ -118,7 +117,7 @@ export default function App() {
 
                             <div className="relative reveal delay-200">
                                 <div className="absolute inset-0 bg-brand-red/20 blur-3xl rounded-full transform scale-90"></div>
-                                <OrderForm onOrderSuccess={() => setOrderPlaced(true)} />
+                                <OrderForm onOrderSuccess={handleOrderSuccess} />
                             </div>
                         </div>
                     </div>

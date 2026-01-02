@@ -3,7 +3,7 @@ import { Shield, Truck, Star, Lock, BadgeCheck, Package } from 'lucide-react';
 import { BUNDLES, PRODUCT_SETTINGS } from '../constants';
 
 interface OrderFormProps {
-    onOrderSuccess: () => void;
+    onOrderSuccess: (totalPrice: number) => void;
 }
 
 // Declaration for global window object logic
@@ -84,7 +84,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({ onOrderSuccess }) => {
                 }
 
                 // Ako je sve u redu
-                onOrderSuccess();
+                onOrderSuccess(totalPrice);
 
             } else {
                 // Fallback for demo visualization
@@ -94,7 +94,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({ onOrderSuccess }) => {
                     console.log(`${key}: ${value}`);
                 }
                 console.log("-------------------------------------------------");
-                onOrderSuccess();
+                onOrderSuccess(totalPrice);
             }
 
         } catch (error: any) {
