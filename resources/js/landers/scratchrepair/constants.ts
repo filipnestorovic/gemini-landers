@@ -3,7 +3,8 @@ export const PRODUCT_SETTINGS = {
   name: "Scratch Repair",
   sku: "11-SCRATCHREPAIR",
   currency: "RSD",
-  shippingCost: 500, // Cena dostave promenjena na 500
+  shippingCost: 500,
+  pixelId: "1016213196582153",
 };
 
 export const BUNDLES = [

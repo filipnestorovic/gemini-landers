@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
@@ -8,13 +8,26 @@ import { Testimonials } from './components/Testimonials';
 import { OrderForm } from './components/OrderForm';
 import { Footer } from './components/Footer';
 import { RecentPurchases } from './components/RecentPurchases';
+import { MetaPixel, trackPixelEvent } from './components/MetaPixel';
+import { PRODUCT_SETTINGS } from './constants';
 import { ShieldCheck, Truck, Star, CheckCircle2, ArrowDown } from 'lucide-react';
 
 export default function App() {
     const [orderPlaced, setOrderPlaced] = useState(false);
 
+    // Track Purchase when order is successful
+    useEffect(() => {
+        if (orderPlaced) {
+            trackPixelEvent('Purchase', {
+                currency: PRODUCT_SETTINGS.currency,
+                value: 0,
+            });
+        }
+    }, [orderPlaced]);
+
     return (
         <div className="min-h-screen flex flex-col overflow-x-hidden bg-slate-900">
+            <MetaPixel pixelId={PRODUCT_SETTINGS.pixelId} />
             <Navbar />
             <RecentPurchases />
 
@@ -25,9 +38,9 @@ export default function App() {
                     <div className="flex justify-center items-center gap-12 animate-marquee whitespace-nowrap text-white font-bold uppercase tracking-wider text-sm md:text-base">
                         <span className="flex items-center gap-2"><Truck size={18} /> Besplatna dostava za Mega Paket</span>
                         <span className="flex items-center gap-2"><ShieldCheck size={18} /> 100% Garancija zadovoljstva</span>
-                        <span className="flex items-center gap-2">🇷🇸 Dostava u celoj Srbiji</span>
+                        <span className="flex items-center gap-2">Dostava u celoj Srbiji</span>
                         <span className="flex items-center gap-2">💰 Plaćanje pouzećem</span>
-                        <span className="flex items-center gap-2"><Truck size={18} /> Besplatna dostava za Mega Paket</span>
+                        <span className="flex items-center gap-2"><Truck size={18} /> Dostava u roku 1-2 radna dana</span>
                     </div>
                 </div>
 
@@ -35,17 +48,12 @@ export default function App() {
                 <DemoSection />
                 <Comparison />
 
-                {/* Order Section Swapped Up */}
+                {/* Order Section */}
                 <section id="order" className="py-20 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900 to-black z-0"></div>
-                    {/* Abstract BG Shapes */}
                     <div className="absolute top-1/4 left-0 w-full h-1/2 bg-brand-red/5 skew-y-3 pointer-events-none"></div>
 
                     <div className="container mx-auto px-4 relative z-10">
-                        {/*
-                Reverted to Grid layout as per user request.
-                Previously this was working fine for the form section.
-            */}
                         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                             <div className="space-y-8 reveal">
                                 <div>
@@ -54,7 +62,6 @@ export default function App() {
                                     </div>
                                     <h2 className="text-4xl md:text-6xl font-display text-white leading-none mb-4">
                                         Naručite odmah i{' '}
-                                        {/* Inline style for gradient text visibility kept */}
                                         <span
                                             style={{
                                                 backgroundImage: 'linear-gradient(to right, #DC2626, #F97316)',
@@ -65,8 +72,8 @@ export default function App() {
                                                 display: 'inline-block'
                                             }}
                                         >
-                      uštedite!
-                    </span>
+                                      uštedite!
+                                    </span>
                                     </h2>
                                     <p className="text-lg text-slate-300 leading-relaxed">
                                         Iskoristite priliku dok traju zalihe. Scratch Repair je dostupan po akcijskoj ceni samo još kratko vreme.
@@ -110,7 +117,6 @@ export default function App() {
                             </div>
 
                             <div className="relative reveal delay-200">
-                                {/* Glow effect behind form */}
                                 <div className="absolute inset-0 bg-brand-red/20 blur-3xl rounded-full transform scale-90"></div>
                                 <OrderForm onOrderSuccess={() => setOrderPlaced(true)} />
                             </div>
@@ -118,7 +124,7 @@ export default function App() {
                     </div>
                 </section>
 
-                {/* Testimonials Moved AFTER Order Section */}
+                {/* Testimonials Section */}
                 <section id="reviews" className="py-24 bg-slate-950 border-t border-slate-900 relative">
                     <div className="container mx-auto px-4 text-center mb-12 reveal">
                         <h2 className="text-3xl md:text-4xl font-display text-white mb-4">Nedavne recenzije kupaca</h2>
@@ -133,14 +139,14 @@ export default function App() {
                             <span className="text-slate-300 ml-2">4.9/5 Prosečna ocena</span>
                         </div>
                         <p className="text-slate-400 max-w-xl mx-auto">
-                            Pogledajte šta ljudi koji su već naručili kažu o Scratch Repair setu. Slike su autentične od naših kupaca.
+                            Pogledajte šta ljudi koji su već naručili kažu o Scratch Repair spreju.
                         </p>
                     </div>
                     <Testimonials />
 
                     <div className="text-center mt-12">
                         <a href="#order" className="inline-flex items-center gap-2 text-brand-red font-bold hover:text-white transition">
-                            Naruči i ti svoj set <ArrowDown size={18} />
+                            Naruči i ti svoj sprej <ArrowDown size={18} />
                         </a>
                     </div>
                 </section>
