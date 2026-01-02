@@ -27,11 +27,11 @@ export const Hero = () => {
                     {/* Badge - Premium Garancija */}
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-600 bg-opacity-20 border border-red-600 border-opacity-30 rounded-full text-red-500 text-[10px] md:text-sm font-bold mb-5 md:mb-8 uppercase tracking-widest reveal">
                         <Sparkles size={14} className="animate-pulse" />
-                        <span>Napredna Nano-formula 2025</span>
+                        <span>Napredna Nano-formula</span>
                     </div>
 
                     {/* Naslov - Povećan na 5xl za mobilni */}
-                    <h1 className="text-6xl md:text-7xl font-extrabold text-white mb-5 md:mb-8 reveal delay-100 font-display uppercase tracking-tighter leading-[1.05]">
+                    <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-5 md:mb-8 reveal delay-100 font-display uppercase tracking-tighter leading-[1.05]">
                         UKLONITE <span className="text-red-600">OGREBOTINE</span> <br className="hidden md:block" />
                         ZA 10 SEKUNDI
                     </h1>
