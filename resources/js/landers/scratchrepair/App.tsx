@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -45,6 +46,9 @@ export default function App() {
 
     const handleOrderSuccess = (value: number) => {
         setOrderPlaced(true);
+        // Skrolovanje na vrh stranice odmah nakon uspešne narudžbine
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
         trackPixelEvent('Purchase', {
             currency: PRODUCT_SETTINGS.currency,
             value: value,

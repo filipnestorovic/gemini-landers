@@ -1,3 +1,4 @@
+
 import React, { useState, FormEvent } from 'react';
 import { Shield, Truck, Lock, BadgeCheck, Package } from 'lucide-react';
 import { BUNDLES, PRODUCT_SETTINGS } from '../constants';
@@ -57,6 +58,17 @@ export const OrderForm: React.FC<OrderFormProps> = ({ onOrderSuccess }) => {
             });
 
             if (!response.ok) throw new Error('Server error');
+
+            // Resetovanje stanja forme nakon uspešnog slanja
+            setFormState({
+                name: '',
+                phone: '',
+                shipping_address: '',
+                shipping_city: '',
+                shipping_zip: ''
+            });
+            setSelectedBundleId(2); // Reset na podrazumevani paket
+
             onOrderSuccess(totalPrice);
         } catch (error) {
             console.error('Error:', error);
@@ -194,13 +206,13 @@ export const OrderForm: React.FC<OrderFormProps> = ({ onOrderSuccess }) => {
                         ) : (
                             <>
                                 <Truck size={24} />
-                                NARUČITE POUZEĆEM
+                                NARUČI POUZEĆEM
                             </>
                         )}
                     </button>
 
                     <div className="flex items-center justify-center gap-6 mt-6 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                        <span className="flex items-center gap-1"><Lock size={12} /> SSL Sigurna kupovina</span>
+                        <span className="flex items-center gap-1"><Lock size={12} /> Sigurna kupovina</span>
                         <span className="flex items-center gap-1"><Shield size={12} /> Garancija kvaliteta</span>
                     </div>
                 </div>
