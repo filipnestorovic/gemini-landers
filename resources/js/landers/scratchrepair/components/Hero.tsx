@@ -1,59 +1,88 @@
 import React from 'react';
-import { ChevronRight, Clock, Award, CheckCircle2 } from 'lucide-react';
+import { ChevronRight, ShieldCheck, Zap, Sparkles, Droplets, Star } from 'lucide-react';
 
 export const Hero = () => {
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 pt-20">
-            {/* Background with higher contrast overlay */}
+        <section className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 pt-24 md:pt-28 pb-12 md:pb-24">
+            {/* Stabilna pozadinska slika vrhunskog kvaliteta */}
             <div
-                className="absolute inset-0 z-0 opacity-30 grayscale"
+                className="absolute inset-0 z-0 opacity-40 scale-105"
                 style={{
                     backgroundImage: `url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920')`,
-                    backgroundPosition: 'center',
+                    backgroundPosition: 'center 60%',
                     backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
                 }}
             ></div>
 
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900 to-gray-900 z-1"></div>
+            {/* Gradijent za maksimalni kontrast teksta */}
+            <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 z-1 opacity-95"></div>
 
-            <div className="container relative z-10 py-12 md:py-24 text-center md:text-left">
-                <div className="max-w-4xl mx-auto md:mx-0">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-600 bg-opacity-10 border border-red-600 border-opacity-30 rounded-full text-red-500 text-xs md:text-sm font-bold mb-6 uppercase tracking-widest reveal">
-                        <Award size={16} />
-                        <span>Broj 1 u Srbiji • Hiljade zadovoljnih korisnika</span>
+            {/* Suptilna tekstura u pozadini */}
+            <div className="absolute inset-0 z-1 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }}></div>
+
+            <div className="container relative z-10 px-6">
+                <div className="max-w-4xl mx-auto md:mx-0 text-center md:text-left">
+
+                    {/* Badge - Premium Garancija */}
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-600 bg-opacity-20 border border-red-600 border-opacity-30 rounded-full text-red-500 text-[10px] md:text-sm font-bold mb-5 md:mb-8 uppercase tracking-widest reveal">
+                        <Sparkles size={14} className="animate-pulse" />
+                        <span>Napredna Nano-formula 2025</span>
                     </div>
 
-                    <h1 className="text-4xl leading-tight md:text-7xl font-extrabold text-white mb-8 reveal delay-100 font-display">
-                        UKLONITE <br className="hidden md:block" />
-                        <span className="text-red-600">OGREBOTINE</span> <br className="hidden md:block" />
+                    {/* Naslov - Povećan na 5xl za mobilni */}
+                    <h1 className="text-6xl md:text-7xl font-extrabold text-white mb-5 md:mb-8 reveal delay-100 font-display uppercase tracking-tighter leading-[1.05]">
+                        UKLONITE <span className="text-red-600">OGREBOTINE</span> <br className="hidden md:block" />
                         ZA 10 SEKUNDI
                     </h1>
 
-                    <p className="text-lg md:text-2xl text-gray-300 mb-10 max-w-2xl leading-relaxed reveal delay-200">
-                        Zaboravite na skupe servise i čekanje. Naša Nano-formula trajno uklanja ogrebotine jednim potezom krpe.
-                    </p>
-
-                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mb-12 reveal delay-300">
-                        <div className="flex items-center gap-2 bg-gray-800 bg-opacity-80 px-4 py-2 rounded-xl border border-gray-700 border-opacity-50">
-                            <CheckCircle2 size={18} className="text-green-500" />
-                            <span className="text-white font-bold text-xs uppercase tracking-tight">ZA SVE BOJE VOZILA</span>
-                        </div>
-                        <div className="flex items-center gap-2 bg-gray-800 bg-opacity-80 px-4 py-2 rounded-xl border border-gray-700 border-opacity-50">
-                            <CheckCircle2 size={18} className="text-green-500" />
-                            <span className="text-white font-bold text-xs uppercase tracking-tight">TRAJNA ZAŠTITA</span>
-                        </div>
+                    {/* Opis - Lekturisan i jasan */}
+                    <div className="mb-8 md:mb-12 reveal delay-200">
+                        <p className="text-xl md:text-3xl text-white font-bold mb-3 md:mb-5 leading-snug">
+                            Neka Vaš automobil ponovo sija kao nov
+                        </p>
+                        <p className="text-base md:text-xl text-gray-400 max-w-2xl leading-relaxed mx-auto md:mx-0">
+                            Specijalno dizajniran sprej momentalno popunjava oštećenja na laku i stvara trajni zaštitni sloj. Rešenje koje štedi novac na skupim popravkama kod autolimara.
+                        </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center gap-6 reveal delay-400">
-                        <a
-                            href="#order"
-                            className="w-full sm:w-auto px-10 py-5 bg-red-600 text-white text-xl font-bold rounded-2xl transition btn-glow flex items-center justify-center gap-3 group"
-                        >
-                            NARUČI ODMAH <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
-                        </a>
-                        <div className="flex items-center gap-2 text-gray-400 font-bold text-sm">
-                            <Clock size={20} className="text-red-600 animate-pulse" />
-                            <span>Dostava 24-48h • Plaćanje pouzećem</span>
+                    {/* Glavni Poziv na Akciju (CTA) */}
+                    <div className="flex flex-col items-center md:items-start gap-8 reveal delay-400">
+                        <div className="w-full sm:w-auto space-y-5">
+                            <a
+                                href="#order"
+                                className="w-full sm:w-auto px-10 py-5 bg-red-600 text-white text-xl font-black rounded-2xl transition btn-glow flex items-center justify-center gap-4 group transform hover:scale-105 active:scale-95 shadow-2xl"
+                            >
+                                POGLEDAJ PONUDU <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
+                            </a>
+
+                            <div className="flex items-center justify-center md:justify-start gap-3 text-gray-400">
+                                <div className="flex -space-x-2">
+                                    {[1, 2, 3].map(i => (
+                                        <img key={i} src={`https://i.pravatar.cc/100?img=${i+30}`} className="w-8 h-8 rounded-full border-2 border-gray-900 shadow-md" alt="Zadovoljan kupac" />
+                                    ))}
+                                </div>
+                                <div className="text-left leading-none">
+                                    <span className="text-[10px] md:text-xs font-bold text-gray-300 uppercase block mb-1">12,400+ zadovoljnih vozača</span>
+                                    <div className="flex text-yellow-500 gap-0.5"><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Brzi bedževi poverenja - Dodata treća ikonica */}
+                        <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-6 gap-y-3 text-gray-500 font-bold text-[9px] md:text-xs uppercase tracking-widest opacity-80">
+                            <div className="flex items-center gap-2">
+                                <ShieldCheck size={16} className="text-green-500" />
+                                <span>Plaćanje pouzećem</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Droplets size={16} className="text-blue-500" />
+                                <span>Sve boje laka</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Zap size={16} className="text-yellow-500" />
+                                <span>Momentalni efekat</span>
+                            </div>
                         </div>
                     </div>
                 </div>

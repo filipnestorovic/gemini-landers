@@ -3,12 +3,12 @@ import { CheckCircle2, X, ShoppingBag } from 'lucide-react';
 
 const recentSales = [
     { name: 'Marko J.', city: 'Beograd', product: 'Pro Paket', time: 'pre 2 min' },
-    { name: 'Petar P.', city: 'Novi Sad', product: 'Start Paket', time: 'pre 5 min' },
-    { name: 'Jelena K.', city: 'Niš', product: 'Mega Paket', time: 'pre 12 min' },
-    { name: 'Ivan S.', city: 'Kragujevac', product: 'Pro Paket', time: 'pre 1 min' },
-    { name: 'Milica B.', city: 'Subotica', product: 'Pro Paket', time: 'pre 8 min' },
-    { name: 'Nikola D.', city: 'Čačak', product: 'Start Paket', time: 'pre 15 min' },
-    { name: 'Ana M.', city: 'Pančevo', product: 'Mega Paket', time: 'pre 4 min' },
+    { name: 'Petar P.', city: 'Novi Sad', product: 'Start Paket', time: 'pre 15 min' },
+    { name: 'Jelena K.', city: 'Niš', product: 'Mega Paket', time: 'pre 20 min' },
+    { name: 'Ivan S.', city: 'Kragujevac', product: 'Pro Paket', time: 'pre 4 min' },
+    { name: 'Milica B.', city: 'Subotica', product: 'Pro Paket', time: 'pre 12 min' },
+    { name: 'Nikola D.', city: 'Čačak', product: 'Start Paket', time: 'pre 18 min' },
+    { name: 'Ana M.', city: 'Pančevo', product: 'Mega Paket', time: 'pre 7 min' },
 ];
 
 export const RecentPurchases = () => {

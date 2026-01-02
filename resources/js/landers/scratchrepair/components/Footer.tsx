@@ -6,7 +6,7 @@ export const Footer = () => {
     return (
         <footer className="bg-gray-950 text-gray-400 py-12 border-t border-gray-800">
             <div className="container mx-auto px-4">
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-4 gap-8">
                     <div className="col-span-1 md:col-span-2">
                         <h4 className="text-white text-2xl font-display mb-4">{PRODUCT_SETTINGS.storeName}</h4>
                         <p className="max-w-sm mb-4">
@@ -23,7 +23,7 @@ export const Footer = () => {
                         <h5 className="text-white font-bold mb-4">Brzi Linkovi</h5>
                         <ul className="space-y-2">
                             <li><a href="#features" className="hover:text-red-600 transition">O Proizvodu</a></li>
-                            <li><a href="#order" className="hover:text-red-600 transition">Naručite odmah</a></li>
+                            <li><a href="#order" className="hover:text-red-600 transition">Naruči</a></li>
                             <li><a href="#" className="hover:text-red-600 transition">Uslovi kupovine</a></li>
                             <li><a href="#" className="hover:text-red-600 transition">Politika privatnosti</a></li>
                         </ul>

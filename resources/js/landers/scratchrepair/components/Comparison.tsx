@@ -1,10 +1,8 @@
 import React from 'react';
 import { Check, X } from 'lucide-react';
-import { BUNDLES, PRODUCT_SETTINGS } from '../constants';
+import { PRODUCT_SETTINGS } from '../constants';
 
 export const Comparison = () => {
-    const basePrice = BUNDLES[0].price;
-
     return (
         <section className="py-20 bg-gray-800 relative overflow-hidden">
             {/* Decorative elements */}
@@ -42,24 +40,24 @@ export const Comparison = () => {
                                 <th className="p-4 text-gray-400 font-normal border-b border-gray-700">Karakteristike</th>
                                 <th className="p-4 text-white font-bold text-lg border-b border-gray-700 bg-gray-800 bg-opacity-50 rounded-t-xl text-center w-1/3">
                                     <div className="text-red-600 mb-1">{PRODUCT_SETTINGS.name}</div>
-                                    <span className="text-xs font-normal text-gray-400 bg-gray-700 px-2 py-0.5 rounded-full">PREPORUKA</span>
+                                    <span className="text-xs font-normal text-gray-400 bg-gray-700 px-2 py-0.5 rounded-full">VAŠ IZBOR</span>
                                 </th>
-                                <th className="p-4 text-gray-300 font-semibold border-b border-gray-700 text-center w-1/4">Profesionalno Lakiranje</th>
-                                <th className="p-4 text-gray-300 font-semibold border-b border-gray-700 text-center w-1/4">Jeftine Olovke</th>
+                                <th className="p-4 text-gray-300 font-semibold border-b border-gray-700 text-center w-1/4">Lakiranje u Servisu</th>
+                                <th className="p-4 text-gray-300 font-semibold border-b border-gray-700 text-center w-1/4">Jeftine Paste</th>
                             </tr>
                             </thead>
                             <tbody className="text-sm md:text-base">
                             <tr className="border-b border-gray-800 hover:bg-gray-800 hover:bg-opacity-30 transition">
-                                <td className="p-4 text-gray-300 font-medium">Cena</td>
-                                <td className="p-4 text-center bg-gray-800 bg-opacity-30 font-bold text-green-400">{basePrice} {PRODUCT_SETTINGS.currency}</td>
-                                <td className="p-4 text-center text-red-400">15.000+ {PRODUCT_SETTINGS.currency}</td>
-                                <td className="p-4 text-center text-green-400">500 - 800 {PRODUCT_SETTINGS.currency}</td>
+                                <td className="p-4 text-gray-300 font-medium">Trošak</td>
+                                <td className="p-4 text-center bg-gray-800 bg-opacity-30 font-bold text-green-400">Minimalan</td>
+                                <td className="p-4 text-center text-red-400">Preko 150€</td>
+                                <td className="p-4 text-center text-gray-400">Srednji</td>
                             </tr>
                             <tr className="border-b border-gray-800 hover:bg-gray-800 hover:bg-opacity-30 transition">
                                 <td className="p-4 text-gray-300 font-medium">Vreme Popravke</td>
-                                <td className="p-4 text-center bg-gray-800 bg-opacity-30 font-bold text-white">2 minuta</td>
-                                <td className="p-4 text-center text-gray-400">3-5 dana</td>
-                                <td className="p-4 text-center text-gray-400">2 minuta</td>
+                                <td className="p-4 text-center bg-gray-800 bg-opacity-30 font-bold text-white">10 Sekundi</td>
+                                <td className="p-4 text-center text-gray-400">3-5 Dana</td>
+                                <td className="p-4 text-center text-gray-400">1 Sat</td>
                             </tr>
                             <tr className="border-b border-gray-800 hover:bg-gray-800 hover:bg-opacity-30 transition">
                                 <td className="p-4 text-gray-300 font-medium">Kvalitet Rezultata</td>
@@ -75,15 +73,15 @@ export const Comparison = () => {
                             </tr>
                             <tr className="border-b border-gray-800 hover:bg-gray-800 hover:bg-opacity-30 transition">
                                 <td className="p-4 text-gray-300 font-medium">Trajnost</td>
-                                <td className="p-4 text-center bg-gray-800 bg-opacity-30 text-white">Dugotrajno (Nano sloj)</td>
+                                <td className="p-4 text-center bg-gray-800 bg-opacity-30 text-white">Trajno (Nano-sloj)</td>
                                 <td className="p-4 text-center text-gray-400">Trajno</td>
-                                <td className="p-4 text-center text-red-400">Isprati se kišom</td>
+                                <td className="p-4 text-center text-red-400">Kratkotrajno</td>
                             </tr>
                             <tr className="hover:bg-gray-800 hover:bg-opacity-30 transition">
                                 <td className="p-4 text-gray-300 font-medium">Jednostavnost</td>
-                                <td className="p-4 text-center bg-gray-800 bg-opacity-30 text-white rounded-b-xl">Uradi sam (Lako)</td>
-                                <td className="p-4 text-center text-red-400">Komplikovano</td>
-                                <td className="p-4 text-center text-white">Uradi sam (Lako)</td>
+                                <td className="p-4 text-center bg-gray-800 bg-opacity-30 text-white rounded-b-xl">Ekstremno Lako</td>
+                                <td className="p-4 text-center text-red-400">Potrebna oprema</td>
+                                <td className="p-4 text-center text-white">Potreban alat</td>
                             </tr>
                             </tbody>
                         </table>
