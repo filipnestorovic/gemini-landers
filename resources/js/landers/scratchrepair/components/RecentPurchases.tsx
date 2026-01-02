@@ -21,13 +21,17 @@ export const RecentPurchases = () => {
             setSale(randomSale);
             setIsVisible(true);
 
+            // Prikazuj notifikaciju 5 sekundi
             setTimeout(() => {
                 setIsVisible(false);
             }, 5000);
         };
 
-        const initialTimer = setTimeout(showRandomSale, 3000);
-        const interval = setInterval(showRandomSale, 12000);
+        // Prvi prikaz nakon 6 sekundi (duplo više nego 3s)
+        const initialTimer = setTimeout(showRandomSale, 6000);
+
+        // Svaki sledeći prikaz na 24 sekunde (duplo više nego 12s)
+        const interval = setInterval(showRandomSale, 24000);
 
         return () => {
             clearTimeout(initialTimer);
@@ -38,7 +42,10 @@ export const RecentPurchases = () => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-50 max-w-[320px] w-full animate-slide-up">
+        <div
+            className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-50 animate-slide-up"
+            style={{ width: 'calc(100% - 2rem)', maxWidth: '320px' }}
+        >
             <div className="bg-white bg-opacity-95 p-4 rounded-xl shadow-2xl border-l-4 border-red-600 flex items-start gap-4 relative overflow-hidden group">
                 <div className="absolute top-0 left-0 w-full h-1 bg-red-600 opacity-75"></div>
 
@@ -53,12 +60,12 @@ export const RecentPurchases = () => {
                     <ShoppingBag size={20} className="text-green-600" />
                 </div>
 
-                <div className="pr-4">
-                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Upravo naručeno</p>
-                    <p className="text-sm font-bold text-gray-800 leading-snug">
+                <div className="pr-4 overflow-hidden">
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1 truncate">Upravo Naručeno</p>
+                    <p className="text-sm font-bold text-gray-800 leading-snug truncate">
                         {sale.name} iz {sale.city}
                     </p>
-                    <p className="text-xs text-gray-600 mt-1">
+                    <p className="text-xs text-gray-600 mt-1 truncate">
                         Kupio/la je <span className="text-red-600 font-bold">{sale.product}</span>
                     </p>
                     <div className="mt-2 flex items-center gap-3">
