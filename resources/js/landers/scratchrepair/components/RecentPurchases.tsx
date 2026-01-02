@@ -21,16 +21,12 @@ export const RecentPurchases = () => {
             setSale(randomSale);
             setIsVisible(true);
 
-            // Hide after 5 seconds
             setTimeout(() => {
                 setIsVisible(false);
             }, 5000);
         };
 
-        // First show after 3 seconds
         const initialTimer = setTimeout(showRandomSale, 3000);
-
-        // Then every 12 seconds
         const interval = setInterval(showRandomSale, 12000);
 
         return () => {
@@ -43,13 +39,12 @@ export const RecentPurchases = () => {
 
     return (
         <div className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-50 max-w-[320px] w-full animate-slide-up">
-            <div className="bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-2xl border-l-4 border-brand-red flex items-start gap-4 relative overflow-hidden group">
-                {/* Switched from custom brand-red to red-600 for gradient safety */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-orange-500 opacity-75"></div>
+            <div className="bg-white bg-opacity-95 p-4 rounded-xl shadow-2xl border-l-4 border-red-600 flex items-start gap-4 relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-full h-1 bg-red-600 opacity-75"></div>
 
                 <button
                     onClick={(e) => { e.stopPropagation(); setIsVisible(false); }}
-                    className="absolute top-2 right-2 text-slate-300 hover:text-slate-500 transition p-1"
+                    className="absolute top-2 right-2 text-gray-300 hover:text-gray-500 transition p-1"
                 >
                     <X size={14} />
                 </button>
@@ -59,19 +54,19 @@ export const RecentPurchases = () => {
                 </div>
 
                 <div className="pr-4">
-                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Upravo Naručeno</p>
-                    <p className="text-sm font-bold text-slate-800 leading-snug">
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Upravo naručeno</p>
+                    <p className="text-sm font-bold text-gray-800 leading-snug">
                         {sale.name} iz {sale.city}
                     </p>
-                    <p className="text-xs text-slate-600 mt-1">
-                        Kupio/la je <span className="text-brand-red font-bold">{sale.product}</span>
+                    <p className="text-xs text-gray-600 mt-1">
+                        Kupio/la je <span className="text-red-600 font-bold">{sale.product}</span>
                     </p>
                     <div className="mt-2 flex items-center gap-3">
-                        <p className="text-[10px] text-slate-400 flex items-center gap-1">
+                        <p className="text-[10px] text-gray-400 flex items-center gap-1">
                             <CheckCircle2 size={10} className="text-green-500" /> Verifikovano
                         </p>
-                        <span className="text-[10px] text-slate-300">•</span>
-                        <p className="text-[10px] text-slate-400">{sale.time}</p>
+                        <span className="text-[10px] text-gray-300">•</span>
+                        <p className="text-[10px] text-gray-400">{sale.time}</p>
                     </div>
                 </div>
             </div>

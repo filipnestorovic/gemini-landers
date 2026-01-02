@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>HomeCarShop | Scratch Repair</title>
 
-    <!-- 1. POUZDAN STATIČKI TAILWIND (Nema CORS problema) -->
+    <!-- Tailwind v2.2.19 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
 
     <style>
@@ -23,27 +23,37 @@
             overflow-x: hidden;
         }
 
-        /* Custom Brand Classes */
+        /* Custom Colors & Utilities */
+        .bg-gray-950 { background-color: #080C15 !important; }
         .bg-brand-red { background-color: var(--brand-red) !important; }
         .text-brand-red { color: var(--brand-red) !important; }
         .font-display { font-family: 'Russo One', sans-serif; }
 
-        .text-gradient {
-            background: linear-gradient(to right, #ef4444, #f97316);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Z-Index Overrides */
+        .z-1 { z-index: 1; }
+        .z-60 { z-index: 60; }
+        .z-100 { z-index: 100; }
+        .z-200 { z-index: 200; }
+
+        /* Eksplicitna pravila za navigaciju (Rešava 'hidden' bug) */
+        @media (min-width: 768px) {
+            .nav-desktop-menu { display: flex !important; }
+            .nav-mobile-toggle { display: none !important; }
+        }
+        @media (max-width: 767px) {
+            .nav-desktop-menu { display: none !important; }
+            .nav-mobile-toggle { display: flex !important; }
         }
 
-        /* Glassmorphism */
+        /* Glassmorphism Effect */
         .glass-nav {
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Marquee Animation */
+        /* Animations */
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -54,25 +64,38 @@
             animation: marquee 30s linear infinite;
         }
 
-        /* Reveal Animations */
+        @keyframes bounce-in {
+            0% { transform: scale(0.9); opacity: 0; }
+            70% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-bounce-in {
+            animation: bounce-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes slide-up {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up {
+            animation: slide-up 0.5s ease-out forwards;
+        }
+
+        /* Reveal Animations on Scroll */
         .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Custom Buttons */
         .btn-glow {
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.4);
         }
         .btn-glow:hover {
-            box-shadow: 0 0 35px rgba(220, 38, 38, 0.6);
+            box-shadow: 0 20px 30px -10px rgba(220, 38, 38, 0.6);
             transform: translateY(-2px);
         }
 
-        /* Responsive Container Adjustments */
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* Form Specifics */
-        input:focus { border-color: var(--brand-red) !important; box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important; }
+        input:focus { border-color: var(--brand-red) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2) !important; }
     </style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,16 +121,13 @@
     window.csrf_token = "{{ csrf_token() }}";
 </script>
 <div id="scratchrepair-root"></div>
-
 <script>
-    // Intersection Observer for animations
     window.addEventListener('load', () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     });
 </script>

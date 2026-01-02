@@ -39,35 +39,34 @@ export const Testimonials = () => {
                 {reviews.map((review, idx) => (
                     <div
                         key={idx}
-                        className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 backdrop-blur-sm hover:bg-slate-800 transition duration-300 reveal delay-100 flex flex-col h-full"
+                        className="bg-gray-800 bg-opacity-50 p-6 rounded-2xl border border-gray-700 hover:bg-gray-800 transition duration-300 reveal delay-100 flex flex-col h-full"
                     >
                         <div className="flex items-center gap-4 mb-4">
                             <div className="relative">
                                 <img
                                     src={review.image}
                                     alt={review.name}
-                                    className="w-12 h-12 rounded-full border-2 border-brand-red object-cover"
+                                    className="w-12 h-12 rounded-full border-2 border-red-600 object-cover"
                                 />
-                                <div className="absolute -bottom-1 -right-1 bg-green-500 rounded-full p-0.5 border border-slate-800">
+                                <div className="absolute -bottom-1 -right-1 bg-green-500 rounded-full p-0.5 border border-gray-800">
                                     <CheckCircle2 size={10} className="text-white" />
                                 </div>
                             </div>
                             <div>
                                 <p className="text-white font-bold text-sm leading-tight">{review.name}</p>
-                                <p className="text-slate-400 text-xs">{review.city}</p>
+                                <p className="text-gray-400 text-xs">{review.city}</p>
                             </div>
                         </div>
 
-                        {/* Changed from brand-accent to yellow-500 for safety */}
                         <div className="flex gap-1 text-yellow-500 mb-3">
                             {[...Array(5)].map((_, i) => (
-                                <Star key={i} size={14} fill={i < review.rating ? "currentColor" : "none"} className={i >= review.rating ? "text-slate-600" : ""} />
+                                <Star key={i} size={14} fill={i < review.rating ? "currentColor" : "none"} className={i >= review.rating ? "text-gray-600" : ""} />
                             ))}
                         </div>
 
-                        <p className="text-slate-300 text-sm italic leading-relaxed flex-grow">"{review.text}"</p>
+                        <p className="text-gray-300 text-sm italic leading-relaxed flex-grow">"{review.text}"</p>
 
-                        <div className="mt-4 pt-4 border-t border-slate-700 flex items-center gap-2">
+                        <div className="mt-4 pt-4 border-t border-gray-700 flex items-center gap-2">
               <span className="text-green-400 text-xs font-bold flex items-center gap-1 uppercase tracking-wider">
                 <CheckCircle2 size={12} /> Proverena kupovina
               </span>

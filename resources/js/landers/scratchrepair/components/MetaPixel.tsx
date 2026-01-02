@@ -17,13 +17,13 @@ export const MetaPixel: React.FC<MetaPixelProps> = ({ pixelId }) => {
 
         // Provera da li je ID uopšte prosleđen
         if (!cleanedId || cleanedId === "") {
-            console.warn("⚠️ Meta Pixel: Pixel ID nije definisan. Praćenje je onemogućeno.");
+            // console.warn("⚠️ Meta Pixel: Pixel ID nije definisan. Praćenje je onemogućeno.");
             return;
         }
 
         const isPlaceholder = cleanedId.includes("1016213196582153");
         if (isPlaceholder) {
-            console.info("ℹ️ Meta Pixel: Stranica koristi 'placeholder' ID. Script će se učitati, ali podaci neće stizati u vaš Meta Dashboard dok ne unesete pravi ID u constants.ts.");
+            // console.info("ℹ️ Meta Pixel: Stranica koristi 'placeholder' ID. Script će se učitati, ali podaci neće stizati u vaš Meta Dashboard dok ne unesete pravi ID u constants.ts.");
         }
 
         // Standardna Meta Pixel skripta
@@ -48,7 +48,7 @@ export const MetaPixel: React.FC<MetaPixelProps> = ({ pixelId }) => {
         window.fbq('init', cleanedId);
         window.fbq('track', 'PageView');
 
-        console.log(`✅ Meta Pixel (${cleanedId}) je uspešno inicijalizovan u zaglavlju.`);
+        // console.log(`✅ Meta Pixel (${cleanedId}) je uspešno inicijalizovan u zaglavlju.`);
     }, [pixelId]);
 
     return (
@@ -69,8 +69,8 @@ export const MetaPixel: React.FC<MetaPixelProps> = ({ pixelId }) => {
 export const trackPixelEvent = (event: string, data?: any) => {
     if (window.fbq) {
         window.fbq('track', event, data);
-        console.log(`📡 Pixel Event Poslat: [${event}]`, data);
+        // console.log(`📡 Pixel Event Poslat: [${event}]`, data);
     } else {
-        console.warn(`❌ Pixel Event [${event}] nije poslat jer 'fbq' funkcija nije dostupna.`);
+        // console.warn(`❌ Pixel Event [${event}] nije poslat jer 'fbq' funkcija nije dostupna.`);
     }
 };
