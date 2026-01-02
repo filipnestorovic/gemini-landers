@@ -13,15 +13,20 @@ declare global {
 
 export const MetaPixel: React.FC<MetaPixelProps> = ({ pixelId }) => {
     useEffect(() => {
-        // Check if Pixel ID is valid or still a placeholder
-        const isPlaceholder = !pixelId || pixelId === "" || pixelId.includes("1016213196582153");
+        const cleanedId = pixelId ? pixelId.trim() : "";
 
-        if (isPlaceholder) {
-            console.warn("⚠️ Meta Pixel: Pixel ID nije podešen u constants.ts. Praćenje je onemogućeno.");
+        // Provera da li je ID uopšte prosleđen
+        if (!cleanedId || cleanedId === "") {
+            console.warn("⚠️ Meta Pixel: Pixel ID nije definisan. Praćenje je onemogućeno.");
             return;
         }
 
-        // Meta Pixel standard script
+        const isPlaceholder = cleanedId.includes("YOUR_PIXEL_ID");
+        if (isPlaceholder) {
+            console.info("ℹ️ Meta Pixel: Stranica koristi 'placeholder' ID. Script će se učitati, ali podaci neće stizati u vaš Meta Dashboard dok ne unesete pravi ID u constants.ts.");
+        }
+
+        // Standardna Meta Pixel skripta
         (function (f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
             if (f.fbq) return;
             n = f.fbq = function () {
@@ -39,9 +44,11 @@ export const MetaPixel: React.FC<MetaPixelProps> = ({ pixelId }) => {
             s.parentNode.insertBefore(t, s);
         })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-        window.fbq('init', pixelId);
+        // Inicijalizacija i PageView
+        window.fbq('init', cleanedId);
         window.fbq('track', 'PageView');
-        console.info(`✅ Meta Pixel inicijalizovan za ID: ${pixelId}`);
+
+        console.log(`✅ Meta Pixel (${cleanedId}) je uspešno inicijalizovan u zaglavlju.`);
     }, [pixelId]);
 
     return (
@@ -57,15 +64,13 @@ export const MetaPixel: React.FC<MetaPixelProps> = ({ pixelId }) => {
 };
 
 /**
- * Utility function to track custom Pixel events
- * @param event Name of the event (e.g., 'Purchase', 'AddToCart')
- * @param data Optional data object for the event
+ * Pomoćna funkcija za ručno okidanje događaja (npr. Purchase)
  */
 export const trackPixelEvent = (event: string, data?: any) => {
     if (window.fbq) {
         window.fbq('track', event, data);
+        console.log(`📡 Pixel Event Poslat: [${event}]`, data);
     } else {
-        // If fbq is not yet loaded, we log it for debugging
-        console.debug(`Pixel Event [${event}] triggered but fbq not loaded yet.`);
+        console.warn(`❌ Pixel Event [${event}] nije poslat jer 'fbq' funkcija nije dostupna.`);
     }
 };
