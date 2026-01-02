@@ -27,40 +27,42 @@ export const Navbar = () => {
         <>
             <nav
                 className={`fixed top-0 left-0 right-0 z-100 transition-all duration-300 w-full flex items-center ${
-                    isScrolled ? 'glass-nav h-16 shadow-xl' : 'bg-transparent h-20'
+                    isScrolled ? 'glass-nav h-16 shadow-2xl' : 'bg-transparent h-20'
                 }`}
+                style={{ zIndex: 1000 }}
             >
                 <div className="container mx-auto px-4 flex justify-between items-center w-full">
                     {/* Logo Section */}
-                    <a href="#" className="flex items-center gap-2 group shrink-0">
+                    <a href="#" className="flex items-center gap-2 group shrink-0" style={{ textDecoration: 'none' }}>
                         <div className="bg-red-600 p-1.5 rounded-lg group-hover:rotate-12 transition-transform shadow-lg">
                             <CarFront className="text-white" size={20} />
                         </div>
-                        <span className="font-display text-lg md:text-2xl text-white uppercase tracking-tighter">
+                        <span className="font-display text-lg md:text-2xl text-white uppercase tracking-tighter" style={{ color: '#FFFFFF' }}>
               {PRODUCT_SETTINGS.storeName}
             </span>
                     </a>
 
-                    {/* Desktop Navigation - Koristi .nav-desktop-menu klasu definisanu u CSS-u */}
+                    {/* Desktop Navigation */}
                     <div className="nav-desktop-menu items-center gap-8">
-                        <a href="#features" className="text-xs font-bold text-gray-300 hover:text-red-500 transition-colors uppercase tracking-widest">Prednosti</a>
-                        <a href="#demo" className="text-xs font-bold text-gray-300 hover:text-red-500 transition-colors uppercase tracking-widest">Upotreba</a>
-                        <a href="#reviews" className="text-xs font-bold text-gray-300 hover:text-red-500 transition-colors uppercase tracking-widest">Iskustva</a>
+                        <a href="#features" className="text-xs font-bold text-gray-300 hover:text-red-500 transition-colors uppercase tracking-widest" style={{ color: '#D1D5DB' }}>Prednosti</a>
+                        <a href="#demo" className="text-xs font-bold text-gray-300 hover:text-red-500 transition-colors uppercase tracking-widest" style={{ color: '#D1D5DB' }}>Upotreba</a>
+                        <a href="#reviews" className="text-xs font-bold text-gray-300 hover:text-red-500 transition-colors uppercase tracking-widest" style={{ color: '#D1D5DB' }}>Iskustva</a>
                         <a
                             href="#order"
                             className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg transition-all active:scale-95 btn-glow"
+                            style={{ color: '#FFFFFF' }}
                         >
                             Naruči Odmah
                         </a>
                     </div>
 
-                    {/* Mobile Menu Toggle - Koristi .nav-mobile-toggle klasu definisanu u CSS-u */}
+                    {/* Mobile Menu Toggle */}
                     <button
                         className="nav-mobile-toggle text-white p-2 bg-gray-800 bg-opacity-50 rounded-xl border border-gray-700 hover:border-red-600 transition-all focus:outline-none"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         aria-label="Toggle Menu"
                     >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isMobileMenuOpen ? <X size={24} color="#FFFFFF" /> : <Menu size={24} color="#FFFFFF" />}
                     </button>
                 </div>
             </nav>
@@ -70,7 +72,7 @@ export const Navbar = () => {
                 className={`md:hidden fixed inset-0 z-60 bg-gray-950 bg-opacity-98 backdrop-blur-xl transition-all duration-500 ${
                     isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                 }`}
-                style={{ top: 0 }}
+                style={{ top: 0, zIndex: 999, backgroundColor: '#080C15' }}
             >
                 <div className="flex flex-col h-full pt-24 px-6 pb-10">
                     <div className="space-y-2 flex flex-col">
@@ -78,6 +80,7 @@ export const Navbar = () => {
                             href="#features"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="text-2xl font-black text-white py-4 border-b border-gray-900 flex justify-between items-center group"
+                            style={{ color: '#FFFFFF' }}
                         >
                             PREDNOSTI
                             <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-gray-600">→</div>
@@ -86,6 +89,7 @@ export const Navbar = () => {
                             href="#demo"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="text-2xl font-black text-white py-4 border-b border-gray-900 flex justify-between items-center group"
+                            style={{ color: '#FFFFFF' }}
                         >
                             UPOTREBA
                             <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-gray-600">→</div>
@@ -94,6 +98,7 @@ export const Navbar = () => {
                             href="#reviews"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="text-2xl font-black text-white py-4 border-b border-gray-900 flex justify-between items-center group"
+                            style={{ color: '#FFFFFF' }}
                         >
                             ISKUSTVA
                             <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-gray-600">→</div>
@@ -105,8 +110,9 @@ export const Navbar = () => {
                             href="#order"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className="block w-full text-center py-5 bg-red-600 text-white rounded-2xl font-black text-xl shadow-2xl active:scale-95 transition-transform"
+                            style={{ color: '#FFFFFF' }}
                         >
-                            NARUČITE ODMAH
+                            NARUČI ODMAH
                         </a>
                         <p className="text-center text-gray-500 mt-6 text-sm font-medium">
                             Besplatna dostava za Mega Paket

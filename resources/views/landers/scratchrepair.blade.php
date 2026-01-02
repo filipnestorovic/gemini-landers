@@ -17,10 +17,11 @@
         /* Resets & Base Styles */
         html { scroll-behavior: smooth; }
         body {
-            background-color: #0F172A;
-            color: #F8FAFC;
+            background-color: #0F172A !important;
+            color: #FFFFFF !important;
             font-family: 'Inter', -apple-system, sans-serif;
             overflow-x: hidden;
+            margin: 0;
         }
 
         /* Custom Colors & Utilities */
@@ -32,10 +33,10 @@
         /* Z-Index Overrides */
         .z-1 { z-index: 1; }
         .z-60 { z-index: 60; }
-        .z-100 { z-index: 100; }
-        .z-200 { z-index: 200; }
+        .z-100 { z-index: 100 !important; }
+        .z-200 { z-index: 200 !important; }
 
-        /* Eksplicitna pravila za navigaciju (Rešava 'hidden' bug) */
+        /* Eksplicitna pravila za navigaciju - sprečavaju hidden bug */
         @media (min-width: 768px) {
             .nav-desktop-menu { display: flex !important; }
             .nav-mobile-toggle { display: none !important; }
@@ -47,10 +48,10 @@
 
         /* Glassmorphism Effect */
         .glass-nav {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Animations */
@@ -81,9 +82,16 @@
             animation: slide-up 0.5s ease-out forwards;
         }
 
-        /* Reveal Animations on Scroll */
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* Reveal Animations on Scroll - Osigurano da se vidi ako skripta kasni */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
 
         .btn-glow {
             box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.4);
@@ -121,15 +129,5 @@
     window.csrf_token = "{{ csrf_token() }}";
 </script>
 <div id="scratchrepair-root"></div>
-<script>
-    window.addEventListener('load', () => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    });
-</script>
 </body>
 </html>
