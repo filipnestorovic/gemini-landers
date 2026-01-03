@@ -19,7 +19,7 @@ class OrderController extends Controller
 
             // Podaci o kupcu
             'name'             => 'required|string|max:255',
-            'phone'            => 'required|string|max:50',
+            'phone' => ['required', 'string', 'regex:/^((\+381)|(00381)|(0))[0-9]{8,10}$/'],
             'shipping_address' => 'required|string|max:255',
             'shipping_city'    => 'required|string|max:100',
             'shipping_zip'     => 'required|string|max:20',

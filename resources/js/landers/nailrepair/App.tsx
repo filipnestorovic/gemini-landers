@@ -447,7 +447,11 @@ const App: React.FC = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Broj telefona (za kurira)</label>
-                            <input type="tel" name="phone" required placeholder="Obavezno za dostavu" className="block w-full rounded-lg border-gray-300 bg-gray-50 shadow-sm focus:bg-white focus:border-brand-500 focus:ring-brand-500 sm:text-sm py-3 px-4 transition-colors" />
+                            <input type="tel" name="phone" required
+                                   pattern="((\+381)|(00381)|(0))[0-9]{8,11}"
+                                   title="Unesite validan broj telefona za Srbiju (npr. 0641234567 ili +381641234567)"
+                                   placeholder="Obavezno za dostavu"
+                                   className="block w-full rounded-lg border-gray-300 bg-gray-50 shadow-sm focus:bg-white focus:border-brand-500 focus:ring-brand-500 sm:text-sm py-3 px-4 transition-colors" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Ulica i Broj</label>

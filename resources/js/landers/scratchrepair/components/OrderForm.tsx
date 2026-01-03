@@ -146,7 +146,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({ onOrderSuccess }) => {
                         />
 
                         <input
-                            type="tel" name="phone" placeholder="Broj telefona (npr. 064...)" required
+                            type="tel" name="phone" placeholder="Broj telefona" required
+                            pattern="((\+381)|(00381)|(0))[0-9]{8,11}"
+                            title="Unesite validan broj telefona za Srbiju (npr. 0641234567 ili +381641234567)"
                             className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none text-base transition-all focus:ring-2 focus:ring-red-600 focus:ring-opacity-20 focus:border-red-600"
                             onChange={handleInputChange}
                             value={formState.phone}
