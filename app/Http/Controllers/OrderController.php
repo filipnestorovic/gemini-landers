@@ -39,7 +39,13 @@ class OrderController extends Controller
 
             $jsonArray = array();
 
-            $jsonArray['site'] = 'https://medeiva.com';
+            if($request->sku == '18-NAILREPAIR') {
+                $site = 'https://divinecareshop.com';
+            } elseif($request->sku == '11-SCRATCHREPAIR') {
+                $site = 'https://homecarshop.com';
+            }
+
+            $jsonArray['site'] = $site;
 
             $jsonArray['number'] = null;
             $jsonArray['date_created'] = now();
