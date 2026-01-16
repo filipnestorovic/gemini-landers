@@ -25,4 +25,14 @@ class LandingController extends Controller
     {
         return view('landers.scratchrepair');
     }
+
+    public function pestreject()
+    {
+        return view('landers.pestreject');
+    }
+
+    public function pestrejectbih()
+    {
+        return view('landers.pestrejectbih');
+    }
 }

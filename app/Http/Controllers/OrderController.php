@@ -16,6 +16,7 @@ class OrderController extends Controller
             'sku'              => 'required|string',
             'quantity'         => 'required|integer|min:1',
             'price'            => 'required|numeric',
+            'country'              => 'required|string',
 
             // Podaci o kupcu
             'name'             => 'required|string|max:255',
@@ -39,9 +40,12 @@ class OrderController extends Controller
 
             $jsonArray = array();
 
-            if($request->sku == '18-NAILREPAIR') {
+            $divineProducts = ['18-NAILREPAIR'];
+            $homeProducts = ['11-SCRATCHREPAIR','31-PESTREJECT'];
+
+            if(in_array($request->sku, $divineProducts)) {
                 $site = 'https://divinecareshop.com';
-            } elseif($request->sku == '11-SCRATCHREPAIR') {
+            } elseif(in_array($request->sku, $homeProducts)) {
                 $site = 'https://homecarshop.com';
             }
 
@@ -87,13 +91,17 @@ class OrderController extends Controller
             // Order::create($orderData);
             // $crmResponse = CrmService::sendOrder($orderData);
 
-            Log::info('Nova porudžbina primljena:', $jsonArray);
+//            Log::info('Nova porudžbina primljena:', $jsonArray);
 
             $client = new GuzzleHttp\Client([
                 'headers' => [ 'Content-Type' => 'application/json' ]
             ]);
 
-            $webhookUrl = "https://braavos.ordertitans.com/api/orderWebhook";
+            if(isset($request->country) && $request->country == "BA") {
+                $webhookUrl = "https://bosnabraavos.ordertitans.com/api/orderWebhook";
+            } else {
+                $webhookUrl = "https://braavos.ordertitans.com/api/orderWebhook";
+            }
 
             try {
                 $response = $client->post($webhookUrl, ['body' => json_encode($jsonArray)]);

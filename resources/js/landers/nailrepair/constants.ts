@@ -5,6 +5,7 @@ import productImage from './assets/nailrepair_2.png';
 
 export const MEDEIVA_SERUM: Product = {
   id: '18-NAILREPAIR',
+    country: 'RS',
   name: 'NAIL REPAIR',
   subtitle: 'SERUM PROTIV GLJIVICA',
   brand: 'Medeiva',

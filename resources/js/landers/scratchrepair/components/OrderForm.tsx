@@ -46,6 +46,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({ onOrderSuccess }) => {
         formData.append('price', selectedBundle.price.toString());
         formData.append('totalPrice', totalPrice.toString());
         formData.append('freeShipping', selectedBundle.freeShipping.toString());
+        formData.append('country', PRODUCT_SETTINGS.country);
 
         try {
             const response = await fetch(targetRoute, {

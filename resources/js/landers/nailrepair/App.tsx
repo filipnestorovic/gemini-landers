@@ -13,6 +13,7 @@ import { StickyBottomCTA } from './components/StickyBottomCTA';
 import { MEDEIVA_SERUM, REVIEWS, FAQS, SYSTEM_INSTRUCTION, INITIAL_CHAT_MESSAGE } from './constants';
 import type { Bundle } from './types';
 import { initPixel, trackEvent } from './services/pixelService';
+import {PRODUCT_SETTINGS} from "../pestreject/constants.js";
 
 // Opciono: ako React Router nije potreban za ovu strukturu foldera,
 // App.tsx glumi direktnu stranicu (Lander).
@@ -81,6 +82,7 @@ const App: React.FC = () => {
         formData.append('price', selectedBundle.price.toString());
         formData.append('totalPrice', totalCost.toString());
         formData.append('freeShipping', selectedBundle.freeShipping.toString());
+        formData.append('country', PRODUCT_SETTINGS.country);
 
         try {
             const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || (window as any).csrf_token;

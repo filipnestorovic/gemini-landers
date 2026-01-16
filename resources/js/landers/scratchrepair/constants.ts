@@ -5,6 +5,7 @@ export const PRODUCT_SETTINGS = {
   currency: "RSD",
   shippingCost: 500,
   pixelId: "1016213196582153",
+    country: 'RS',
 };
 
 export const BUNDLES = [
