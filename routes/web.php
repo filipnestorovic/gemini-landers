@@ -13,7 +13,7 @@ use App\Http\Controllers\OrderController;
 
 
 if (app()->environment('local')) {
-    Route::get('/', [LandingController::class, 'pestrejectbih'])->name('pestrejectbih');
+    Route::get('/', [LandingController::class, 'pestreject'])->name('pestreject');
 } else {
     Route::domain('auto.homecarshop.com')->group(function () {
         Route::get('/', [LandingController::class, 'homecarshop'])->name('homecarshop');

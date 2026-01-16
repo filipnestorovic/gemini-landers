@@ -1,22 +1,10 @@
 import { Bundle } from './types';
 
-import productImg from './images/product.png';
-import ratImg from './images/rat.png';
-import bugImg from './images/bug.png';
-import familyImg from './images/family.png';
-
 export const IMAGES = {
-    // Main Product: Square (1:1) is most versatile for responsive hero splits
-    PRODUCT: productImg,
-
-    // Pests: Landscape (4:3 or 3:2) for cards
-    PEST_RAT: ratImg,
-
-    // Insects: Landscape (4:3 or 3:2) for cards
-    PEST_BUG: bugImg,
-
-    // Family: Landscape
-    FAMILY_SAFE: familyImg,
+    PRODUCT: "/images/pestreject/product.png",
+    PEST_RAT: "/images/pestreject/rat.png",
+    PEST_BUG: "/images/pestreject/bug.png",
+    FAMILY_SAFE: "/images/pestreject/family.png",
 };
 
 export const BRAND_NAME = "HomeCarShop";

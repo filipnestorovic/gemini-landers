@@ -1,8 +1,6 @@
 
 import type { Product, Review } from './types';
 
-import productImage from './assets/nailrepair_2.png';
-
 export const MEDEIVA_SERUM: Product = {
   id: '18-NAILREPAIR',
     country: 'RS',
@@ -33,7 +31,7 @@ export const MEDEIVA_SERUM: Product = {
         'Eterično ulje lavande'
     ],
   images: [
-      productImage,
+      '/images/nailrepair/nailrepair_2.png',
     'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800'
   ],
     bundles: [

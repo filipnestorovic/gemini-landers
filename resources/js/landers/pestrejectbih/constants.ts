@@ -1,10 +1,5 @@
 import { Bundle } from './types';
 
-import productImg from './images/product.png';
-import ratImg from './images/rat.png';
-import bugImg from './images/bug.png';
-import familyImg from './images/family.png';
-
 export const BRAND_NAME = "HomeCarShop";
 export const PRODUCT_NAME = "Pest Reject";
 export const PIXEL_ID = "1016213196582153";
@@ -19,17 +14,10 @@ export const PRODUCT_SETTINGS = {
 // Using explicit placeholders so the layout looks correct immediately.
 // The user will replace these with real images based on the dimensions provided.
 export const IMAGES = {
-    // Main Product: Square (1:1) is most versatile for responsive hero splits
-    PRODUCT: productImg,
-
-    // Pests: Landscape (4:3 or 3:2) for cards
-    PEST_RAT: ratImg,
-
-    // Insects: Landscape (4:3 or 3:2) for cards
-    PEST_BUG: bugImg,
-
-    // Family: Landscape
-    FAMILY_SAFE: familyImg,
+    PRODUCT: "/images/pestreject/product.png",
+    PEST_RAT: "/images/pestreject/rat.png",
+    PEST_BUG: "/images/pestreject/bug.png",
+    FAMILY_SAFE: "/images/pestreject/family.png",
 };
 
 export const BUNDLES: Bundle[] = [
