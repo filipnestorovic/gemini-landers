@@ -1,9 +1,9 @@
 import { Bundle } from './types';
 
-import productImg from '@/images/product.png';
-import ratImg from '@/images/rat.png';
-import bugImg from '@/images/bug.png';
-import familyImg from '@/images/family.png';
+import productImg from './images/product.png';
+import ratImg from './images/rat.png';
+import bugImg from './images/bug.png';
+import familyImg from './images/family.png';
 
 export const IMAGES = {
     // Main Product: Square (1:1) is most versatile for responsive hero splits
