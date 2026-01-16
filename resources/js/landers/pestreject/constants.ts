@@ -1,9 +1,23 @@
 import { Bundle } from './types';
 
-import productImg from './assets/product.png';
-import ratImg from './assets/rat.png';
-import bugImg from './assets/bug.png';
-import familyImg from './assets/family.png';
+import productImg from '@/images/product.png';
+import ratImg from '@/images/rat.png';
+import bugImg from '@/images/bug.png';
+import familyImg from '@/images/family.png';
+
+export const IMAGES = {
+    // Main Product: Square (1:1) is most versatile for responsive hero splits
+    PRODUCT: productImg,
+
+    // Pests: Landscape (4:3 or 3:2) for cards
+    PEST_RAT: ratImg,
+
+    // Insects: Landscape (4:3 or 3:2) for cards
+    PEST_BUG: bugImg,
+
+    // Family: Landscape
+    FAMILY_SAFE: familyImg,
+};
 
 export const BRAND_NAME = "HomeCarShop";
 export const PRODUCT_NAME = "Pest Reject";
@@ -18,19 +32,6 @@ export const PRODUCT_SETTINGS = {
 
 // Using explicit placeholders so the layout looks correct immediately.
 // The user will replace these with real images based on the dimensions provided.
-export const IMAGES = {
-  // Main Product: Square (1:1) is most versatile for responsive hero splits
-  PRODUCT: productImg,
-
-  // Pests: Landscape (4:3 or 3:2) for cards
-  PEST_RAT: ratImg,
-
-  // Insects: Landscape (4:3 or 3:2) for cards
-  PEST_BUG: bugImg,
-
-  // Family: Landscape
-  FAMILY_SAFE: familyImg,
-};
 
 export const BUNDLES: Bundle[] = [
     {

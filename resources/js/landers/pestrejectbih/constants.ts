@@ -1,9 +1,9 @@
 import { Bundle } from './types';
 
-import productImg from './assets/product.png';
-import ratImg from './assets/rat.png';
-import bugImg from './assets/bug.png';
-import familyImg from './assets/family.png';
+import productImg from './images/product.png';
+import ratImg from './images/rat.png';
+import bugImg from './images/bug.png';
+import familyImg from './images/family.png';
 
 export const BRAND_NAME = "HomeCarShop";
 export const PRODUCT_NAME = "Pest Reject";
