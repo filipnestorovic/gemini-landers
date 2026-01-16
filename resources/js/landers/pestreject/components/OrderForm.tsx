@@ -56,6 +56,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ selectedBundle, onBundleChange })
         formData.append('price', selectedBundle.price.toString());
         formData.append('totalPrice', totalPrice.toString());
         formData.append('shippingCost', shippingCost.toString());
+        formData.append('freeShipping', selectedBundle.freeShipping.toString());
         formData.append('country', PRODUCT_SETTINGS.country);
 
         try {

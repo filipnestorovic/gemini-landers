@@ -7,6 +7,7 @@ export interface Bundle {
   label: string;
   isPopular?: boolean;
   savings: number;
+    freeShipping: boolean;
 }
 
 export interface OrderData {

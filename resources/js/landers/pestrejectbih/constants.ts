@@ -27,6 +27,7 @@ export const BUNDLES: Bundle[] = [
     coverage: 15,
     price: 35, // KM
     oldPrice: 59,
+      freeShipping: false,
     label: "Start Paket (1 soba)",
     savings: 24 // KM
   },
@@ -36,6 +37,7 @@ export const BUNDLES: Bundle[] = [
     coverage: 30,
     price: 59, // KM
     oldPrice: 99,
+      freeShipping: false,
     label: "Standard (Stan/Studio)",
     isPopular: true,
     savings: 40 // KM
@@ -46,6 +48,7 @@ export const BUNDLES: Bundle[] = [
     coverage: 45,
     price: 79, // KM
     oldPrice: 129,
+      freeShipping: true,
     label: "Porodični (Cijeli stan)",
     savings: 50 // KM
   },
@@ -55,6 +58,7 @@ export const BUNDLES: Bundle[] = [
     coverage: 60,
     price: 95, // KM
     oldPrice: 159,
+      freeShipping: true,
     label: "Kuća Paket (Max zaštita)",
     savings: 64 // KM
   }

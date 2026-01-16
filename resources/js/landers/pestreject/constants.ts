@@ -27,6 +27,7 @@ export const BUNDLES: Bundle[] = [
         quantity: 1,
         coverage: 15,
         price: 1990,
+        freeShipping: false,
         oldPrice: 3390, // Approx 40% discount logic
         label: "Start Paket (1 soba)",
         savings: 1400 // In RSD
@@ -36,6 +37,7 @@ export const BUNDLES: Bundle[] = [
         quantity: 2,
         coverage: 30,
         price: 3490,
+        freeShipping: false,
         oldPrice: 5890, // Approx 40% discount logic
         label: "Standard (Stan/Studio)",
         isPopular: true,
@@ -46,15 +48,17 @@ export const BUNDLES: Bundle[] = [
         quantity: 3,
         coverage: 45,
         price: 4490,
+        freeShipping: true,
         oldPrice: 7490, // Approx 40% discount logic
         label: "Porodični (Ceo stan)",
-        savings: 3000 // In RSD
+        savings: 3000, // In RSD
     },
     {
         id: 4,
         quantity: 4,
         coverage: 60,
         price: 5490,
+        freeShipping: true,
         oldPrice: 9190, // Approx 40% discount logic
         label: "Kuća Paket (Max zaštita)",
         savings: 3700 // In RSD
