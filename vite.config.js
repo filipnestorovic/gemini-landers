@@ -13,6 +13,8 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/landers/nailrepair/main.tsx',
                 'resources/js/landers/scratchrepair/main.tsx',
+                'resources/js/landers/pestreject/main.tsx',
+                'resources/js/landers/pestrejectbih/main.tsx',
                 // ovde ćemo kasnije dodavati još entry fajlova za landere
             ],
             refresh: true,
