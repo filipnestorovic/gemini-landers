@@ -1,0 +1,50 @@
+import React from 'react';
+import { Zap, Droplet, Shield, Palette } from 'lucide-react';
+
+const featureList = [
+  {
+    icon: <Zap size={28} className="text-white" />,
+    title: "Brza Primjena",
+    desc: "Nema potrebe za majstorima. Naprskajte, sačekajte 10 sekundi i prebrišite. Ogrebotina nestaje pred vašim očima."
+  },
+  {
+    icon: <Palette size={28} className="text-white" />,
+    title: "Univerzalna Formula",
+    desc: "Savršeno za sve boje i vrste lakova (metalik, perla, mat). Nano-čestice se automatski prilagođavaju nijansi laka."
+  },
+  {
+    icon: <Shield size={28} className="text-white" />,
+    title: "Zaštitni Sloj",
+    desc: "Stvara nevidljivi hidrofobni štit koji odbija vodu i prašinu, sprečavajući rđu i nova sitna oštećenja."
+  },
+  {
+    icon: <Droplet size={28} className="text-white" />,
+    title: "Ušteda Novca",
+    desc: "Jedna bočica zamenjuje popravke vrijedne stotine eura. Popravite oštećenja sami za djelić cijene servisa."
+  }
+];
+
+export const Features = () => {
+  return (
+    <section id="features" className="py-24 bg-gray-900 relative overflow-hidden">
+      <div className="container relative z-10">
+        <div className="text-center mb-20 reveal">
+          <h2 className="text-3xl md:text-5xl font-display text-white mb-6">Zašto kupiti Scratch Repair?</h2>
+          <div className="w-24 h-1.5 bg-red-600 mx-auto rounded-full"></div>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          {featureList.map((feature, idx) => (
+            <div key={idx} className="bg-gray-800 bg-opacity-40 p-8 rounded-3xl border border-gray-700 border-opacity-50 hover:border-red-600 transition-all group reveal" style={{ transitionDelay: `${idx * 100}ms` }}>
+              <div className="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform shadow-lg">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-extrabold text-white mb-4 leading-tight">{feature.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

@@ -60,9 +60,6 @@ class OrderController extends Controller
             $jsonArray['shipping']['postcode'] = $request->shipping_zip;
             $jsonArray['billing']['phone'] = $request->phone;
 
-            $jsonArray['countryCode'] = 'RS';
-            $jsonArray['currency'] = 'RSD';
-
             if($request->boolean('freeShipping')) {
                 $jsonArray['shipping_lines'] = array([
                     "method_id" => "free_shipping"
@@ -98,8 +95,12 @@ class OrderController extends Controller
             ]);
 
             if(isset($request->country) && $request->country == "BA") {
+                $jsonArray['countryCode'] = 'BA';
+                $jsonArray['currency'] = 'BAM';
                 $webhookUrl = "https://bosnabraavos.ordertitans.com/api/orderWebhook";
             } else {
+                $jsonArray['countryCode'] = 'RS';
+                $jsonArray['currency'] = 'RSD';
                 $webhookUrl = "https://braavos.ordertitans.com/api/orderWebhook";
             }
 

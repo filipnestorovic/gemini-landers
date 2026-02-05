@@ -13,11 +13,12 @@ use App\Http\Controllers\OrderController;
 
 
 if (app()->environment('local')) {
-    Route::get('/', [LandingController::class, 'pestreject'])->name('pestreject');
+    Route::get('/', [LandingController::class, 'scratchrepairbih'])->name('scratchrepairbih');
 } else {
     Route::domain('auto.homecarshop.com')->group(function () {
         Route::get('/', [LandingController::class, 'homecarshop'])->name('homecarshop');
         Route::get('/scratchrepair', [LandingController::class, 'scratchrepair'])->name('scratchrepair');
+        Route::get('/scratchrepairbih', [LandingController::class, 'scratchrepairbih'])->name('scratchrepairbih');
         Route::get('/pestreject', [LandingController::class, 'pestreject'])->name('pestreject');
         Route::get('/pestrejectbih', [LandingController::class, 'pestrejectbih'])->name('pestrejectbih');
     });

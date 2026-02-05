@@ -26,6 +26,11 @@ class LandingController extends Controller
         return view('landers.scratchrepair');
     }
 
+    public function scratchrepairbih()
+    {
+        return view('landers.scratchrepairbih');
+    }
+
     public function pestreject()
     {
         return view('landers.pestreject');
