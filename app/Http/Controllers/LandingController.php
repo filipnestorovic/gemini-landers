@@ -40,4 +40,9 @@ class LandingController extends Controller
     {
         return view('landers.pestrejectbih');
     }
+
+    public function medeiva()
+    {
+        return view('landers.medeiva');
+    }
 }

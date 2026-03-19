@@ -13,7 +13,8 @@ use App\Http\Controllers\OrderController;
 
 
 if (app()->environment('local')) {
-    Route::get('/', [LandingController::class, 'scratchrepairbih'])->name('scratchrepairbih');
+    Route::get('/', [LandingController::class, 'medeiva'])->name('medeiva');
+    Route::get('/scan', [LandingController::class, 'medeiva'])->name('medeivascan');
 } else {
     Route::domain('auto.homecarshop.com')->group(function () {
         Route::get('/', [LandingController::class, 'homecarshop'])->name('homecarshop');
@@ -26,6 +27,11 @@ if (app()->environment('local')) {
     Route::domain('medeiva.divinecareshop.com')->group(function () {
         Route::get('/', [LandingController::class, 'divinecareshop'])->name('divinecareshop');
         Route::get('/nailrepair', [LandingController::class, 'nailrepair'])->name('nailrepair');
+    });
+
+    Route::domain('medeiva.com')->group(function () {
+        Route::get('/', [LandingController::class, 'medeiva'])->name('medeiva');
+        Route::get('/scan', [LandingController::class, 'medeiva'])->name('medeivascan');
     });
 }
 

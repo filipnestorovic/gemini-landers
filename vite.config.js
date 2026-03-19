@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/js/landers/scratchrepairbih/main.tsx',
                 'resources/js/landers/pestreject/main.tsx',
                 'resources/js/landers/pestrejectbih/main.tsx',
+                'resources/js/landers/medeiva/main.tsx'
                 // ovde ćemo kasnije dodavati još entry fajlova za landere
             ],
             refresh: true,
