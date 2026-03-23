@@ -28,9 +28,10 @@ export const products: Product[] = [
         ],
         usage: "Nanesite 2-3 prskanja direktno u ušni kanal (za decu stariju od 3 godine dovoljno je jedno). Blago zatvorite uho vatom na 5 minuta kako bi aktivni sastojci delovali, a zatim isperite toplom vodom i nežno obrišite. Koristite 1-2 puta dnevno za maksimalne rezultate i dugotrajno olakšanje.",
         images: [
-            "https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800"
+            "/images/medeiva/antitinnitus/tinnitusherbs.png",
+            "/images/medeiva/antitinnitus/tinnitussolver.png",
+            "/images/medeiva/antitinnitus/howitworks.png",
+            "/images/medeiva/antitinnitus/keybenefits.png"
         ],
         tag: "Najprodavanije",
         category: "Nega ušiju",

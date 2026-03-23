@@ -3,6 +3,7 @@ import { Leaf, Droplets, Sparkles, Instagram, Facebook, Twitter, ArrowRight, Men
 import React, { useState, useEffect } from "react";
 import { products } from "./data/products";
 import type { Product } from "./data/products";
+import * as CONSTANTS from "./constants";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
                 <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     <Leaf className="w-6 h-6 text-brand-olive" />
-                    <span className="font-serif text-2xl tracking-widest uppercase">Medeiva</span>
+                    <span className="font-serif text-2xl tracking-widest uppercase">{CONSTANTS.APP_NAME}</span>
                 </div>
 
                 <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium">
@@ -71,19 +72,15 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
 
     if (!product) return null;
 
-    const baseShippingCost = region === 'RS' ? 500 : 13;
-    const currency = region === 'RS' ? 'RSD' : 'KM';
+    const regionSettings = CONSTANTS.REGION_SETTINGS[region];
+    const baseShippingCost = regionSettings.shippingCost;
+    const currency = regionSettings.currency;
 
     const getBundlePrice = (qty: number, r: 'RS' | 'BA') => {
-        if (r === 'RS') {
-            if (qty === 1) return 1990;
-            if (qty === 2) return 3690;
-            return 4990;
-        } else {
-            if (qty === 1) return 35;
-            if (qty === 2) return 59;
-            return 79;
-        }
+        const settings = CONSTANTS.REGION_SETTINGS[r];
+        if (qty === 1) return settings.bundles[1];
+        if (qty === 2) return settings.bundles[2];
+        return settings.bundles[3];
     };
 
     const displayPrice = getBundlePrice(1, region);
@@ -117,7 +114,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
 
         const PRODUCT_SETTINGS = {
             sku: product.id,
-            country: region === 'RS' ? 'Srbija' : 'Bosna i Hercegovina'
+            country: regionSettings.name
         };
 
         const payload = new FormData();
@@ -174,7 +171,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                     className="bg-brand-cream w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-3xl shadow-2xl flex flex-col md:flex-row"
                     onClick={e => e.stopPropagation()}
                 >
-                    <div className="w-full md:w-1/2 h-80 md:h-auto relative bg-zinc-100 flex flex-col">
+                    <div className="w-full md:w-1/2 aspect-square md:h-auto relative bg-zinc-100 flex flex-col">
                         <div className="flex-grow relative overflow-hidden">
                             <AnimatePresence mode="wait">
                                 <motion.img
@@ -243,7 +240,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                                         <>
                                             <p className="text-2xl text-brand-olive">{initialDiscountedPrice} {currency}</p>
                                             <p className="text-sm text-zinc-400 line-through">{displayPrice} {currency}</p>
-                                            <span className="text-[10px] bg-brand-olive text-white px-2 py-0.5 rounded-full uppercase font-bold">-10% za stare kupce</span>
+                                            <span className="text-[10px] bg-brand-olive text-white px-2 py-0.5 rounded-full uppercase font-bold">{CONSTANTS.SCAN_PAGE_CONTENT.discountTag}</span>
                                         </>
                                     ) : (
                                         <p className="text-2xl text-brand-olive">{displayPrice} {currency}</p>
@@ -439,8 +436,8 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                                                 </div>
                                                 <p className="text-[10px] text-zinc-500 leading-relaxed">
                                                     {region === 'RS'
-                                                        ? `Srbija: Dostava 1-2 radna dana kurirskom službom. ${isFreeShipping ? 'BESPLATNA DOSTAVA!' : 'Cena 500 RSD.'}`
-                                                        : `Bosna: Dostava 3-4 radna dana brzom poštom. ${isFreeShipping ? 'BESPLATNA DOSTAVA!' : 'Cena 13 KM.'}`}
+                                                        ? `Srbija: Dostava ${CONSTANTS.REGION_SETTINGS.RS.shippingDays} kurirskom službom. ${isFreeShipping ? 'BESPLATNA DOSTAVA!' : `Cena ${CONSTANTS.REGION_SETTINGS.RS.shippingCost} ${CONSTANTS.REGION_SETTINGS.RS.currency}.`}`
+                                                        : `Bosna: Dostava ${CONSTANTS.REGION_SETTINGS.BA.shippingDays} brzom poštom. ${isFreeShipping ? 'BESPLATNA DOSTAVA!' : `Cena ${CONSTANTS.REGION_SETTINGS.BA.shippingCost} ${CONSTANTS.REGION_SETTINGS.BA.currency}.`}`}
                                                 </p>
                                             </div>
 
@@ -514,22 +511,12 @@ const TrustBar = () => {
     return (
         <div className="bg-white border-y border-zinc-100 py-6 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between gap-8 md:gap-4">
-                <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-brand-olive" />
-                    <span className="text-[10px] uppercase tracking-widest font-bold">Plaćanje pouzećem</span>
-                </div>
-                <div className="flex items-center gap-3">
-                    <Sparkles className="w-5 h-5 text-brand-olive" />
-                    <span className="text-[10px] uppercase tracking-widest font-bold">100% Prirodni sastojci</span>
-                </div>
-                <div className="flex items-center gap-3">
-                    <Droplets className="w-5 h-5 text-brand-olive" />
-                    <span className="text-[10px] uppercase tracking-widest font-bold">Brza dostava (1-3 dana)</span>
-                </div>
-                <div className="flex items-center gap-3">
-                    <Leaf className="w-5 h-5 text-brand-olive" />
-                    <span className="text-[10px] uppercase tracking-widest font-bold">Eko-prijateljska pakovanja</span>
-                </div>
+                {CONSTANTS.TRUST_BAR_ITEMS.map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                        <item.icon className="w-5 h-5 text-brand-olive" />
+                        <span className="text-[10px] uppercase tracking-widest font-bold">{item.title}</span>
+                    </div>
+                ))}
             </div>
         </div>
     );
@@ -540,9 +527,9 @@ const Hero = () => {
         <section className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
             <div className="absolute inset-0 z-0">
                 <img
-                    src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=1920"
+                    src={CONSTANTS.HERO_CONTENT.image}
                     alt="Natural botanical background"
-                    className="w-full h-full object-cover opacity-60"
+                    className="w-full h-full object-cover opacity-50"
                     referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-brand-cream/60 via-transparent to-brand-cream"></div>
@@ -555,18 +542,18 @@ const Hero = () => {
                     transition={{ duration: 0.8 }}
                 >
                     <h1 className="text-6xl md:text-8xl font-light mb-6 leading-tight">
-                        Prirodna formula.<br />
-                        <span className="italic">Vidljivi rezultati.</span>
+                        {CONSTANTS.HERO_CONTENT.title}<br />
+                        <span className="italic">{CONSTANTS.HERO_CONTENT.subtitle}</span>
                     </h1>
                     <p className="text-lg md:text-xl text-zinc-600 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                        Medeiva spaja čistotu botaničkih ekstrakata sa naprednom naukom kako bi pružila ciljana rešenja za vaše zdravlje i negu.
+                        {CONSTANTS.HERO_CONTENT.description}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="#shop" className="bg-brand-olive text-white px-10 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-zinc-800 transition-all shadow-lg shadow-brand-olive/20 text-center">
-                            Istražite kolekciju
+                            {CONSTANTS.HERO_CONTENT.ctaPrimary}
                         </a>
                         <a href="#philosophy" className="border border-brand-olive text-brand-olive px-10 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-brand-olive hover:text-white transition-all text-center">
-                            Naša priča
+                            {CONSTANTS.HERO_CONTENT.ctaSecondary}
                         </a>
                     </div>
                 </motion.div>
@@ -580,15 +567,16 @@ const ProductsSection = ({ onProductClick, region, hasScanDiscount }: { onProduc
         <section id="shop" className="py-24 px-6 max-w-7xl mx-auto">
             <div className="flex justify-between items-end mb-12">
                 <div>
-                    <h2 className="text-4xl md:text-5xl mb-4">Naši proizvodi</h2>
-                    <p className="text-zinc-500 uppercase tracking-widest text-xs">Specijalizovana rešenja za Vašu negu</p>
+                    <h2 className="text-4xl md:text-5xl mb-4">{CONSTANTS.PRODUCTS_SECTION_CONTENT.title}</h2>
+                    <p className="text-zinc-500 uppercase tracking-widest text-xs">{CONSTANTS.PRODUCTS_SECTION_CONTENT.subtitle}</p>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
                 {products.map((product, idx) => {
-                    const displayPrice = region === 'RS' ? 1990 : 35;
-                    const currency = region === 'RS' ? 'RSD' : 'KM';
+                    const regionSettings = CONSTANTS.REGION_SETTINGS[region];
+                    const displayPrice = regionSettings.bundles[1];
+                    const currency = regionSettings.currency;
                     const discountedPrice = Math.round(displayPrice * 0.9);
 
                     return (
@@ -598,7 +586,7 @@ const ProductsSection = ({ onProductClick, region, hasScanDiscount }: { onProduc
                             className="group cursor-pointer"
                             onClick={() => onProductClick(product)}
                         >
-                            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl mb-6">
+                            <div className="relative aspect-square overflow-hidden rounded-2xl mb-6">
                                 <img
                                     src={product.images[0]}
                                     alt={product.name}
@@ -612,7 +600,7 @@ const ProductsSection = ({ onProductClick, region, hasScanDiscount }: { onProduc
                                 )}
                                 {hasScanDiscount && (
                                     <div className="absolute top-4 right-4 bg-brand-olive text-white px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-lg">
-                                        -10% za stare kupce
+                                        {CONSTANTS.SCAN_PAGE_CONTENT.discountTag}
                                     </div>
                                 )}
                             </div>
@@ -646,7 +634,7 @@ const Philosophy = () => {
                         className="rounded-3xl overflow-hidden aspect-square"
                     >
                         <img
-                            src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=800"
+                            src={CONSTANTS.PHILOSOPHY_CONTENT.image}
                             alt="Close up of green leaves"
                             className="w-full h-full object-cover"
                             referrerPolicy="no-referrer"
@@ -656,48 +644,23 @@ const Philosophy = () => {
                 </div>
 
                 <div>
-                    <h2 className="text-4xl md:text-6xl mb-8 leading-tight">Priroda kao lek,<br />nauka kao dokaz.</h2>
+                    <h2 className="text-4xl md:text-6xl mb-8 leading-tight">{CONSTANTS.PHILOSOPHY_CONTENT.title.split(',').map((t, i) => <React.Fragment key={i}>{t}{i === 0 && <br />}</React.Fragment>)}</h2>
                     <p className="text-lg text-white/80 font-light leading-relaxed mb-12">
-                        Verujemo da se najmoćniji sastojci nalaze u prirodi. Naša laboratorija se fokusira na tehnike ekstrakcije koje čuvaju molekularni integritet svake biljke, osiguravajući da ono što stigne do vas bude maksimalno efikasno.
+                        {CONSTANTS.PHILOSOPHY_CONTENT.description}
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                        <div className="flex gap-4">
-                            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                                <Leaf className="w-5 h-5" />
+                        {CONSTANTS.PHILOSOPHY_CONTENT.features.map((f, i) => (
+                            <div key={i} className="flex gap-4">
+                                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                    <f.icon className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <h4 className="font-serif text-xl mb-2">{f.title}</h4>
+                                    <p className="text-sm text-white/60 font-light">{f.desc}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 className="font-serif text-xl mb-2">100% Organsko</h4>
-                                <p className="text-sm text-white/60 font-light">Sastojci sa održivih i čistih farmi.</p>
-                            </div>
-                        </div>
-                        <div className="flex gap-4">
-                            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                                <Droplets className="w-5 h-5" />
-                            </div>
-                            <div>
-                                <h4 className="font-serif text-xl mb-2">Hladno ceđeno</h4>
-                                <p className="text-sm text-white/60 font-light">Čuvanje hranljivih materija kroz nežnu ekstrakciju.</p>
-                            </div>
-                        </div>
-                        <div className="flex gap-4">
-                            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                                <Sparkles className="w-5 h-5" />
-                            </div>
-                            <div>
-                                <h4 className="font-serif text-xl mb-2">Bezbedno</h4>
-                                <p className="text-sm text-white/60 font-light">Dermatološki testirano i bez štetnih hemikalija.</p>
-                            </div>
-                        </div>
-                        <div className="flex gap-4">
-                            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                                <CheckCircle2 className="w-5 h-5" />
-                            </div>
-                            <div>
-                                <h4 className="font-serif text-xl mb-2">Tradicija</h4>
-                                <p className="text-sm text-white/60 font-light">Recepture proverene generacijama.</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -709,78 +672,46 @@ const ComparisonSection = () => {
     return (
         <section className="py-24 px-6 max-w-5xl mx-auto">
             <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl mb-4">Zašto Medeiva?</h2>
-                <p className="text-zinc-500 uppercase tracking-widest text-xs">Razlika koju vaša koža i telo osećaju</p>
+                <h2 className="text-4xl md:text-5xl mb-4">{CONSTANTS.COMPARISON_CONTENT.title}</h2>
+                <p className="text-zinc-500 uppercase tracking-widest text-xs">{CONSTANTS.COMPARISON_CONTENT.subtitle}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm">
                     <h3 className="text-2xl font-serif mb-8 text-brand-olive flex items-center gap-3">
-                        <CheckCircle2 className="w-6 h-6" /> Medeiva rešenja
+                        <CheckCircle2 className="w-6 h-6" /> {CONSTANTS.COMPARISON_CONTENT.medeiva.title}
                     </h3>
                     <ul className="space-y-6">
-                        <li className="flex gap-4">
-                            <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-1">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                            </div>
-                            <div>
-                                <p className="font-bold text-sm">100% Prirodna baza</p>
-                                <p className="text-xs text-zinc-500">Bez mineralnih ulja, parabena i veštačkih mirisa.</p>
-                            </div>
-                        </li>
-                        <li className="flex gap-4">
-                            <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-1">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                            </div>
-                            <div>
-                                <p className="font-bold text-sm">Hladna ekstrakcija</p>
-                                <p className="text-xs text-zinc-500">Čuvamo sve lekovite molekule biljaka.</p>
-                            </div>
-                        </li>
-                        <li className="flex gap-4">
-                            <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-1">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                            </div>
-                            <div>
-                                <p className="font-bold text-sm">Dugotrajni rezultati</p>
-                                <p className="text-xs text-zinc-500">Fokusiramo se na regeneraciju, ne samo na maskiranje simptoma.</p>
-                            </div>
-                        </li>
+                        {CONSTANTS.COMPARISON_CONTENT.medeiva.items.map((item, i) => (
+                            <li key={i} className="flex gap-4">
+                                <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-1">
+                                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                </div>
+                                <div>
+                                    <p className="font-bold text-sm">{item.title}</p>
+                                    <p className="text-xs text-zinc-500">{item.desc}</p>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
                 <div className="bg-zinc-50 p-8 rounded-3xl border border-zinc-200 opacity-70">
                     <h3 className="text-2xl font-serif mb-8 text-zinc-400 flex items-center gap-3">
-                        <X className="w-6 h-6" /> Standardni proizvodi
+                        <X className="w-6 h-6" /> {CONSTANTS.COMPARISON_CONTENT.standard.title}
                     </h3>
                     <ul className="space-y-6">
-                        <li className="flex gap-4">
-                            <div className="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center shrink-0 mt-1">
-                                <X className="w-4 h-4 text-zinc-400" />
-                            </div>
-                            <div>
-                                <p className="font-bold text-sm text-zinc-500">Sintetički sastojci</p>
-                                <p className="text-xs text-zinc-400">Često sadrže agresivne konzervanse i baze.</p>
-                            </div>
-                        </li>
-                        <li className="flex gap-4">
-                            <div className="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center shrink-0 mt-1">
-                                <X className="w-4 h-4 text-zinc-400" />
-                            </div>
-                            <div>
-                                <p className="font-bold text-sm text-zinc-500">Masovna proizvodnja</p>
-                                <p className="text-xs text-zinc-400">Brza obrada na visokim temperaturama gubi lekovitost.</p>
-                            </div>
-                        </li>
-                        <li className="flex gap-4">
-                            <div className="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center shrink-0 mt-1">
-                                <X className="w-4 h-4 text-zinc-400" />
-                            </div>
-                            <div>
-                                <p className="font-bold text-sm text-zinc-500">Trenutno olakšanje</p>
-                                <p className="text-xs text-zinc-400">Simptomi se često vraćaju čim prestanete sa upotrebom.</p>
-                            </div>
-                        </li>
+                        {CONSTANTS.COMPARISON_CONTENT.standard.items.map((item, i) => (
+                            <li key={i} className="flex gap-4">
+                                <div className="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center shrink-0 mt-1">
+                                    <X className="w-4 h-4 text-zinc-400" />
+                                </div>
+                                <div>
+                                    <p className="font-bold text-sm text-zinc-500">{item.title}</p>
+                                    <p className="text-xs text-zinc-400">{item.desc}</p>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
@@ -789,44 +720,21 @@ const ComparisonSection = () => {
 };
 
 const WhyMedeiva = () => {
-    const features = [
-        {
-            title: "Čista Priroda",
-            desc: "Koristimo isključivo biljke uzgajane bez pesticida, poštujući njihove prirodne cikluse rasta.",
-            icon: <Leaf className="w-6 h-6" />
-        },
-        {
-            title: "Naučna Preciznost",
-            desc: "Svaka formula je rezultat dugogodišnjeg istraživanja i laboratorijskih testiranja efikasnosti.",
-            icon: <Sparkles className="w-6 h-6" />
-        },
-        {
-            title: "Tradicionalna Rešenja",
-            desc: "Oživljavamo stare recepture i prilagođavamo ih potrebama savremenog čoveka.",
-            icon: <Droplets className="w-6 h-6" />
-        },
-        {
-            title: "Brzi Rezultati",
-            desc: "Visoka koncentracija aktivnih supstanci osigurava vidljive promene u kratkom roku.",
-            icon: <CheckCircle2 className="w-6 h-6" />
-        }
-    ];
-
     return (
         <section className="py-12 px-6 bg-brand-cream">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-1 flex flex-col justify-center">
-                        <h2 className="text-4xl md:text-5xl mb-6 leading-tight">Zašto izabrati Medeiva proizvode?</h2>
+                        <h2 className="text-4xl md:text-5xl mb-6 leading-tight">{CONSTANTS.WHY_MEDEIVA_CONTENT.title}</h2>
                         <p className="text-zinc-600 font-light leading-relaxed mb-8">
-                            Naša misija je da pružimo najkvalitetniju prirodnu negu koja zaista pravi razliku. Bez kompromisa, bez veštačkih dodataka.
+                            {CONSTANTS.WHY_MEDEIVA_CONTENT.description}
                         </p>
                     </div>
                     <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {features.map((f, i) => (
+                        {CONSTANTS.WHY_MEDEIVA_CONTENT.features.map((f, i) => (
                             <div key={i} className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm hover:shadow-md transition-shadow">
                                 <div className="w-12 h-12 rounded-2xl bg-brand-olive/5 flex items-center justify-center text-brand-olive mb-6">
-                                    {f.icon}
+                                    <f.icon className="w-6 h-6" />
                                 </div>
                                 <h3 className="text-xl font-serif mb-3">{f.title}</h3>
                                 <p className="text-sm text-zinc-500 font-light leading-relaxed">{f.desc}</p>
@@ -841,36 +749,22 @@ const WhyMedeiva = () => {
 
 const Results = () => {
     const [currentReview, setCurrentReview] = useState(0);
-    const reviews = [
-        {
-            text: "Nakon samo dve nedelje korišćenja Anti Tinnitus spreja, zujanje u ušima se značajno smanjilo. Konačno mogu da spavam u miru.",
-            author: "Marko P., Zadovoljan korisnik"
-        },
-        {
-            text: "Nail Repair serum je jedina stvar koja mi je pomogla sa upornim gljivicama na noktima. Rezultati su vidljivi već posle prve bočice.",
-            author: "Ana M., Beograd"
-        },
-        {
-            text: "Oduševljena sam prirodnim sastavom. Miris lavande u spreju je predivan i veoma umirujući.",
-            author: "Jelena K., Novi Sad"
-        }
-    ];
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentReview((prev) => (prev + 1) % reviews.length);
+            setCurrentReview((prev) => (prev + 1) % CONSTANTS.REVIEWS.length);
         }, 5000);
         return () => clearInterval(timer);
     }, []);
 
     return (
         <section id="results" className="py-24 px-6 max-w-7xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl mb-16">Vidljive transformacije</h2>
+            <h2 className="text-4xl md:text-5xl mb-16">{CONSTANTS.RESULTS_CONTENT.title}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div className="space-y-8 flex flex-col justify-center">
                     <div className="aspect-video rounded-3xl overflow-hidden bg-zinc-100 shadow-xl">
                         <img
-                            src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800"
+                            src={CONSTANTS.RESULTS_CONTENT.image}
                             alt="Herbal plants"
                             className="w-full h-full object-cover"
                             referrerPolicy="no-referrer"
@@ -886,13 +780,13 @@ const Results = () => {
                                 className="space-y-4"
                             >
                                 <blockquote className="text-2xl font-serif italic text-zinc-700">
-                                    "{reviews[currentReview].text}"
+                                    "{CONSTANTS.REVIEWS[currentReview].text}"
                                 </blockquote>
-                                <p className="uppercase tracking-widest text-xs font-bold text-brand-olive">— {reviews[currentReview].author}</p>
+                                <p className="uppercase tracking-widest text-xs font-bold text-brand-olive">— {CONSTANTS.REVIEWS[currentReview].author}</p>
                             </motion.div>
                         </AnimatePresence>
                         <div className="flex justify-center gap-2 mt-8">
-                            {reviews.map((_, i) => (
+                            {CONSTANTS.REVIEWS.map((_, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setCurrentReview(i)}
@@ -903,11 +797,13 @@ const Results = () => {
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-center p-12 bg-zinc-50 rounded-3xl border border-zinc-200 shadow-inner">
-                    <div className="text-6xl font-serif text-brand-olive mb-4">92%</div>
-                    <p className="text-lg text-zinc-600 font-light mb-8">korisnika je prijavilo smanjenje simptoma tinitusa u roku od 30 dana.</p>
-                    <div className="w-full h-px bg-zinc-200 mb-8"></div>
-                    <div className="text-6xl font-serif text-brand-olive mb-4">89%</div>
-                    <p className="text-lg text-zinc-600 font-light">primećuje brži oporavak i jačanje noktiju uz Nail Repair serum.</p>
+                    {CONSTANTS.RESULTS_STATS.map((stat, i) => (
+                        <React.Fragment key={i}>
+                            <div className="text-6xl font-serif text-brand-olive mb-4">{stat.value}</div>
+                            <p className="text-lg text-zinc-600 font-light mb-8">{stat.desc}</p>
+                            {i < CONSTANTS.RESULTS_STATS.length - 1 && <div className="w-full h-px bg-zinc-200 mb-8"></div>}
+                        </React.Fragment>
+                    ))}
                 </div>
             </div>
         </section>
@@ -917,34 +813,11 @@ const Results = () => {
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    const faqs = [
-        {
-            q: "Kako mogu da naručim proizvode?",
-            a: "Proizvode možete naručiti direktno putem našeg sajta klikom na dugme 'Naruči odmah' kod željenog proizvoda. Potrebno je samo da unesete svoje podatke i potvrdite porudžbinu."
-        },
-        {
-            q: "Koji su načini plaćanja?",
-            a: "Trenutno podržavamo plaćanje pouzećem, što znači da porudžbinu plaćate kuriru prilikom preuzimanja paketa."
-        },
-        {
-            q: "Koliko se čeka na dostavu?",
-            a: "Dostava za Srbiju obično traje 1-2 radna dana, dok je za Bosnu i Hercegovinu rok 3-4 radna dana od trenutka potvrde porudžbine."
-        },
-        {
-            q: "Da li vršite dostavu u druge zemlje?",
-            a: "Trenutno vršimo dostavu samo na teritoriji Srbije i Bosne i Hercegovine. Planiramo proširenje na ostale zemlje regiona u skorijoj budućnosti."
-        },
-        {
-            q: "Šta ako nisam zadovoljan proizvodom?",
-            a: "Vaše zadovoljstvo je naš prioritet. Ukoliko niste zadovoljni rezultatima, imate pravo na povraćaj novca u roku od 14 dana od dana prijema, bez obzira na to da li je proizvod otvoren ili korišćen. Dovoljno je da nas kontaktirate i mi ćemo Vam refundirati sredstva."
-        }
-    ];
-
     return (
         <section id="faq" className="py-12 px-6 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl mb-12 text-center">Česta pitanja</h2>
+            <h2 className="text-4xl md:text-5xl mb-12 text-center">{CONSTANTS.FAQ_CONTENT.title}</h2>
             <div className="space-y-4">
-                {faqs.map((faq, i) => (
+                {CONSTANTS.FAQS.map((faq, i) => (
                     <div key={i} className="border-b border-zinc-200 pb-4">
                         <button
                             onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -991,10 +864,10 @@ const Footer = ({ onLegalClick }: { onLegalClick: (type: string) => void }) => {
                 <div className="col-span-1 md:col-span-2">
                     <div className="flex items-center gap-2 mb-8">
                         <Leaf className="w-8 h-8 text-brand-olive" />
-                        <span className="font-serif text-3xl tracking-widest uppercase">Medeiva</span>
+                        <span className="font-serif text-3xl tracking-widest uppercase">{CONSTANTS.APP_NAME}</span>
                     </div>
                     <p className="text-white/50 font-light max-w-md mb-8 leading-relaxed">
-                        Pridružite se našoj zajednici i primajte savete o zdravlju, rani pristup novim proizvodima i 15% popusta na prvu porudžbinu.
+                        {CONSTANTS.FOOTER_CONTENT.description}
                     </p>
                     {subscribed ? (
                         <motion.div
@@ -1002,7 +875,7 @@ const Footer = ({ onLegalClick }: { onLegalClick: (type: string) => void }) => {
                             animate={{ opacity: 1, y: 0 }}
                             className="bg-brand-olive/20 border border-brand-olive/30 p-4 rounded-2xl text-brand-olive text-sm font-medium"
                         >
-                            Hvala Vam! Uspešno ste se prijavili na naš newsletter.
+                            {CONSTANTS.FOOTER_CONTENT.newsletterSuccess}
                         </motion.div>
                     ) : (
                         <form onSubmit={handleSubscribe} className="flex gap-4">
@@ -1011,44 +884,50 @@ const Footer = ({ onLegalClick }: { onLegalClick: (type: string) => void }) => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Vaša email adresa"
+                                placeholder={CONSTANTS.FOOTER_CONTENT.newsletterPlaceholder}
                                 className="bg-white/5 border border-white/10 rounded-full px-6 py-3 flex-grow text-sm focus:outline-none focus:border-brand-olive transition-colors"
                             />
                             <button type="submit" className="bg-white text-zinc-900 px-8 py-3 rounded-full text-sm uppercase tracking-widest font-bold hover:bg-brand-olive hover:text-white transition-all">
-                                Pridruži se
+                                {CONSTANTS.FOOTER_CONTENT.newsletterButton}
                             </button>
                         </form>
                     )}
                 </div>
 
                 <div>
-                    <h4 className="font-serif text-xl mb-6">Istražite</h4>
+                    <h4 className="font-serif text-xl mb-6">{CONSTANTS.FOOTER_CONTENT.exploreTitle}</h4>
                     <ul className="space-y-4 text-white/50 text-sm font-light">
-                        <li><a href="#shop" className="hover:text-white transition-colors">Prodavnica</a></li>
-                        <li><a href="#faq" className="hover:text-white transition-colors">Česta pitanja</a></li>
-                        <li><a href="#philosophy" className="hover:text-white transition-colors">Filozofija</a></li>
+                        {CONSTANTS.NAV_LINKS.filter(link => link.href !== '#contact').map((link, i) => (
+                            <li key={i}><a href={link.href} className="hover:text-white transition-colors">{link.label}</a></li>
+                        ))}
                     </ul>
                 </div>
 
                 <div>
-                    <h4 className="font-serif text-xl mb-6">Kontakt</h4>
+                    <h4 className="font-serif text-xl mb-6">{CONSTANTS.FOOTER_CONTENT.contactTitle}</h4>
                     <div className="flex gap-6 mb-8">
-                        <Instagram className="w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors" />
-                        <Facebook className="w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors" />
-                        <Twitter className="w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors" />
+                        <a href={CONSTANTS.CONTACT_INFO.socials.instagram} target="_blank" rel="noreferrer">
+                            <Instagram className="w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors" />
+                        </a>
+                        <a href={CONSTANTS.CONTACT_INFO.socials.facebook} target="_blank" rel="noreferrer">
+                            <Facebook className="w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors" />
+                        </a>
+                        <a href={CONSTANTS.CONTACT_INFO.socials.twitter} target="_blank" rel="noreferrer">
+                            <Twitter className="w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors" />
+                        </a>
                     </div>
                     <p className="text-white/50 text-sm font-light">
-                        info@medeiva.com
+                        {CONSTANTS.CONTACT_INFO.email}
                     </p>
                 </div>
             </div>
 
             <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-white/30">
-                <p>© 2026 Medeiva Natural Cosmetics. Sva prava zadržana.</p>
+                <p>© 2026 {CONSTANTS.APP_NAME} Natural Cosmetics. {CONSTANTS.FOOTER_CONTENT.copyright}</p>
                 <div className="flex gap-8">
-                    <button onClick={() => onLegalClick('privacy')} className="hover:text-white">Politika privatnosti</button>
-                    <button onClick={() => onLegalClick('terms')} className="hover:text-white">Uslovi korišćenja</button>
-                    <button onClick={() => onLegalClick('shipping')} className="hover:text-white">Isporuka i povraćaj</button>
+                    {CONSTANTS.FOOTER_CONTENT.legalLinks.map((link, i) => (
+                        <button key={i} onClick={() => onLegalClick(link.type)} className="hover:text-white">{link.label}</button>
+                    ))}
                 </div>
             </div>
         </footer>
@@ -1058,40 +937,7 @@ const Footer = ({ onLegalClick }: { onLegalClick: (type: string) => void }) => {
 const LegalModal = ({ isOpen, type, onClose }: { isOpen: boolean, type: string | null, onClose: () => void }) => {
     if (!isOpen || !type) return null;
 
-    const content = {
-        privacy: {
-            title: "Politika privatnosti",
-            body: `Vaša privatnost nam je izuzetno važna. Medeiva Natural Cosmetics se obavezuje da će štititi sve Vaše lične podatke koje prikupimo tokom procesa poručivanja.
-
-1. Prikupljanje podataka: Prikupljamo samo neophodne podatke za isporuku (ime, telefon, adresa).
-2. Upotreba podataka: Podaci se koriste isključivo za realizaciju Vaše porudžbine i komunikaciju u vezi sa isporukom.
-3. Deljenje podataka: Vaši podaci se dele isključivo sa kurirskom službom radi dostave.
-4. Sigurnost: Primenjujemo savremene mere zaštite kako bismo osigurali bezbednost Vaših informacija.`
-        },
-        terms: {
-            title: "Uslovi korišćenja",
-            body: `Dobrodošli na Medeiva.com. Korišćenjem našeg sajta prihvatate sledeće uslove:
-
-1. Poručivanje: Porudžbina se smatra potvrđenom nakon što Vas naš operater kontaktira putem telefona.
-2. Cene: Sve cene su iskazane u lokalnoj valuti (RSD ili KM) i uključuju PDV.
-3. Intelektualna svojina: Sav sadržaj na sajtu je vlasništvo brenda Medeiva.
-4. Odgovornost: Trudimo se da opisi proizvoda budu što precizniji, ali ne možemo garantovati da su bez grešaka.`
-        },
-        shipping: {
-            title: "Isporuka i povraćaj",
-            body: `Ponosni smo na našu efikasnu logistiku i fer politiku povraćaja.
-
-ISPORUKA:
-- Srbija: 1-2 radna dana, cena dostave 500 RSD (besplatno za 3+ proizvoda).
-- Bosna i Hercegovina: 3-4 radna dana, cena dostave 13 KM (besplatno za 3+ proizvoda).
-- Plaćanje se vrši isključivo pouzećem (gotovinom kuriru).
-
-POVRAĆAJ:
-- Imate pravo na povraćaj novca u roku od 14 dana od prijema.
-- VAŽNO: Povraćaj prihvatamo čak i ako je proizvod otvoren i korišćen, jer verujemo u kvalitet naših formula.
-- Troškove poštarine za povraćaj snosi kupac, osim u slučaju oštećenog proizvoda.`
-        }
-    }[type as keyof typeof content];
+    const content = CONSTANTS.LEGAL_CONTENT[type as keyof typeof CONSTANTS.LEGAL_CONTENT];
 
     return (
         <AnimatePresence>
@@ -1145,22 +991,27 @@ const ScanPage = ({ onActivate }: { onActivate: () => void }) => {
                 <div className="w-20 h-20 bg-brand-olive/10 rounded-full flex items-center justify-center mx-auto mb-8">
                     <Sparkles className="w-10 h-10 text-brand-olive" />
                 </div>
-                <h1 className="text-4xl font-serif mb-6">Dobrodošli nazad!</h1>
+                <h1 className="text-4xl font-serif mb-6">{CONSTANTS.SCAN_PAGE_CONTENT.title}</h1>
                 <p className="text-zinc-600 mb-8 leading-relaxed">
-                    Kao naš verni kupac, ostvarili ste pravo na <span className="text-brand-olive font-bold">10% dodatnog popusta</span> na Vašu narednu porudžbinu.
+                    {CONSTANTS.SCAN_PAGE_CONTENT.description.split(CONSTANTS.SCAN_PAGE_CONTENT.discountHighlight).map((t, i) => (
+                        <React.Fragment key={i}>
+                            {t}
+                            {i === 0 && <span className="text-brand-olive font-bold">{CONSTANTS.SCAN_PAGE_CONTENT.discountHighlight}</span>}
+                        </React.Fragment>
+                    ))}
                 </p>
                 <div className="bg-zinc-50 p-6 rounded-3xl mb-8 border border-dashed border-zinc-200">
-                    <p className="text-[10px] uppercase tracking-widest font-bold text-zinc-400 mb-2">Vaš popust je aktiviran</p>
-                    <p className="text-2xl font-mono text-brand-olive font-bold">STARI-KUPCI-10</p>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-zinc-400 mb-2">{CONSTANTS.SCAN_PAGE_CONTENT.activatedText}</p>
+                    <p className="text-2xl font-mono text-brand-olive font-bold">{CONSTANTS.SCAN_PAGE_CONTENT.discountCode}</p>
                 </div>
                 <button
                     onClick={onActivate}
                     className="w-full bg-brand-olive text-white py-5 rounded-full uppercase tracking-widest text-sm font-bold hover:bg-zinc-800 transition-all shadow-xl shadow-brand-olive/20 flex items-center justify-center gap-3"
                 >
-                    Iskoristi popust <ArrowRight className="w-4 h-4" />
+                    {CONSTANTS.SCAN_PAGE_CONTENT.cta} <ArrowRight className="w-4 h-4" />
                 </button>
                 <p className="mt-8 text-[10px] text-zinc-400 uppercase tracking-widest">
-                    Popust će biti automatski obračunat prilikom naručivanja.
+                    {CONSTANTS.SCAN_PAGE_CONTENT.footer}
                 </p>
             </motion.div>
         </div>
@@ -1176,7 +1027,7 @@ export default function App() {
 
     useEffect(() => {
         // Check if we are on /scan route
-        if (window.location.pathname === '/scan') {
+        if (window.location.pathname.endsWith('/scan')) {
             setIsScanRoute(true);
         }
 
