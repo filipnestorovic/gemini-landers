@@ -54,9 +54,9 @@ export const products: Product[] = [
         ],
         usage: "Za najbolje rezultate, nanesite serum dva puta dnevno (ujutru i uveče) na čiste i suve nokte. Blago utrljajte u nokatnu ploču i predeo zanoktica dok se potpuno ne upije. Redovna upotreba je ključ za zdrave, jake i lepe nokte.",
         images: [
-            "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1502741126161-b048400d085d?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?auto=format&fit=crop&q=80&w=800"
+            "/images/medeiva/nailrepair/nailrepair1.png",
+            "/images/medeiva/nailrepair/nailrepair2.png",
+            "/images/medeiva/nailrepair/nailrepair3.png",
         ],
         tag: "Novo",
         category: "Nega noktiju",

@@ -188,7 +188,7 @@ export const PRODUCTS_SECTION_CONTENT = {
 
 export const RESULTS_CONTENT = {
     title: "Vidljive transformacije",
-    image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=800"
+    image: "/images/medeiva/medeiva_natural.png"
 };
 
 export const FAQ_CONTENT = {
