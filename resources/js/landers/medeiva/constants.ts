@@ -1,5 +1,4 @@
-
-import {Leaf, Droplets, Sparkles, CheckCircle2} from "lucide-react";
+import { Leaf, Droplets, Sparkles, CheckCircle2 } from "lucide-react";
 
 export const APP_NAME = "Medeiva";
 
@@ -7,7 +6,7 @@ export const HERO_CONTENT = {
     title: "Prirodna formula.",
     subtitle: "Vidljivi rezultati.",
     description: "Medeiva spaja čistotu botaničkih ekstrakata sa naprednom naukom kako bi pružila ciljana rešenja za vaše zdravlje i negu.",
-    image: "/images/medeiva/medeiva_hero.webp",
+    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=1920",
     ctaPrimary: "Istražite kolekciju",
     ctaSecondary: "Naša priča"
 };
@@ -17,10 +16,10 @@ export const PHILOSOPHY_CONTENT = {
     description: "Verujemo da se najmoćniji sastojci nalaze u prirodi. Naša laboratorija se fokusira na tehnike ekstrakcije koje čuvaju molekularni integritet svake biljke, osiguravajući da ono što stigne do vas bude maksimalno efikasno.",
     image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=800",
     features: [
-        {title: "100% Organsko", desc: "Sastojci sa održivih i čistih farmi.", icon: Leaf},
-        {title: "Hladno ceđeno", desc: "Čuvanje hranljivih materija kroz nežnu ekstrakciju.", icon: Droplets},
-        {title: "Bezbedno", desc: "Dermatološki testirano i bez štetnih hemikalija.", icon: Sparkles},
-        {title: "Tradicija", desc: "Recepture proverene generacijama.", icon: CheckCircle2}
+        { title: "100% Organsko", desc: "Sastojci sa održivih i čistih farmi.", icon: Leaf },
+        { title: "Hladno ceđeno", desc: "Čuvanje hranljivih materija kroz nežnu ekstrakciju.", icon: Droplets },
+        { title: "Bezbedno", desc: "Dermatološki testirano i bez štetnih hemikalija.", icon: Sparkles },
+        { title: "Tradicija", desc: "Recepture proverene generacijama.", icon: CheckCircle2 }
     ]
 };
 
@@ -28,70 +27,30 @@ export const WHY_MEDEIVA_CONTENT = {
     title: "Zašto izabrati Medeiva proizvode?",
     description: "Naša misija je da pružimo najkvalitetniju prirodnu negu koja zaista pravi razliku. Bez kompromisa, bez veštačkih dodataka.",
     features: [
-        {
-            title: "Čista Priroda",
-            desc: "Koristimo isključivo biljke uzgajane bez pesticida, poštujući njihove prirodne cikluse rasta.",
-            icon: Leaf
-        },
-        {
-            title: "Naučna Preciznost",
-            desc: "Svaka formula je rezultat dugogodišnjeg istraživanja i laboratorijskih testiranja efikasnosti.",
-            icon: Sparkles
-        },
-        {
-            title: "Tradicionalna Rešenja",
-            desc: "Oživljavamo stare recepture i prilagođavamo ih potrebama savremenog čoveka.",
-            icon: Droplets
-        },
-        {
-            title: "Brzi Rezultati",
-            desc: "Visoka koncentracija aktivnih supstanci osigurava vidljive promene u kratkom roku.",
-            icon: CheckCircle2
-        }
+        { title: "Čista Priroda", desc: "Koristimo isključivo biljke uzgajane bez pesticida, poštujući njihove prirodne cikluse rasta.", icon: Leaf },
+        { title: "Naučna Preciznost", desc: "Svaka formula je rezultat dugogodišnjeg istraživanja i laboratorijskih testiranja efikasnosti.", icon: Sparkles },
+        { title: "Tradicionalna Rešenja", desc: "Oživljavamo stare recepture i prilagođavamo ih potrebama savremenog čoveka.", icon: Droplets },
+        { title: "Brzi Rezultati", desc: "Visoka koncentracija aktivnih supstanci osigurava vidljive promene u kratkom roku.", icon: CheckCircle2 }
     ]
 };
 
 export const REVIEWS = [
-    {
-        text: "Nakon samo dve nedelje korišćenja Anti Tinnitus spreja, zujanje u ušima se značajno smanjilo. Konačno mogu da spavam u miru.",
-        author: "Marko P., Zadovoljan korisnik"
-    },
-    {
-        text: "Nail Repair serum je jedina stvar koja mi je pomogla sa upornim gljivicama na noktima. Rezultati su vidljivi već posle prve bočice.",
-        author: "Ana M., Beograd"
-    },
-    {
-        text: "Oduševljena sam prirodnim sastavom. Miris lavande u spreju je predivan i veoma umirujući.",
-        author: "Jelena K., Novi Sad"
-    }
+    { text: "Nakon samo dve nedelje korišćenja Anti Tinnitus spreja, zujanje u ušima se značajno smanjilo. Konačno mogu da spavam u miru.", author: "Marko P., Zadovoljan korisnik" },
+    { text: "Nail Repair serum je jedina stvar koja mi je pomogla sa upornim gljivicama na noktima. Rezultati su vidljivi već posle prve bočice.", author: "Ana M., Beograd" },
+    { text: "Oduševljena sam prirodnim sastavom. Miris lavande u spreju je predivan i veoma umirujući.", author: "Jelena K., Novi Sad" }
 ];
 
 export const RESULTS_STATS = [
-    {value: "92%", desc: "korisnika je prijavilo smanjenje simptoma tinitusa u roku od 30 dana."},
-    {value: "89%", desc: "primećuje brži oporavak i jačanje noktiju uz Nail Repair serum."}
+    { value: "92%", desc: "korisnika je prijavilo smanjenje simptoma tinitusa u roku od 30 dana." },
+    { value: "89%", desc: "primećuje brži oporavak i jačanje noktiju uz Nail Repair serum." }
 ];
 
 export const FAQS = [
-    {
-        q: "Kako mogu da naručim proizvode?",
-        a: "Proizvode možete naručiti direktno putem našeg sajta klikom na dugme 'Naruči odmah' kod željenog proizvoda. Potrebno je samo da unesete svoje podatke i potvrdite porudžbinu."
-    },
-    {
-        q: "Koji su načini plaćanja?",
-        a: "Trenutno podržavamo plaćanje pouzećem, što znači da porudžbinu plaćate kuriru prilikom preuzimanja paketa."
-    },
-    {
-        q: "Koliko se čeka na dostavu?",
-        a: "Dostava za Srbiju obično traje 1-2 radna dana, dok je za Bosnu i Hercegovinu rok 3-4 radna dana od trenutka potvrde porudžbine."
-    },
-    {
-        q: "Da li vršite dostavu u druge zemlje?",
-        a: "Trenutno vršimo dostavu samo na teritoriji Srbije i Bosne i Hercegovine. Planiramo proširenje na ostale zemlje regiona u skorijoj budućnosti."
-    },
-    {
-        q: "Šta ako nisam zadovoljan proizvodom?",
-        a: "Vaše zadovoljstvo je naš prioritet. Ukoliko niste zadovoljni rezultatima, imate pravo na povraćaj novca u roku od 14 dana od dana prijema, bez obzira na to da li je proizvod otvoren ili korišćen. Dovoljno je da nas kontaktirate i mi ćemo Vam refundirati sredstva."
-    }
+    { q: "Kako mogu da naručim proizvode?", a: "Proizvode možete naručiti direktno putem našeg sajta klikom na dugme 'Naruči odmah' kod željenog proizvoda. Potrebno je samo da unesete svoje podatke i potvrdite porudžbinu." },
+    { q: "Koji su načini plaćanja?", a: "Trenutno podržavamo plaćanje pouzećem, što znači da porudžbinu plaćate kuriru prilikom preuzimanja paketa." },
+    { q: "Koliko se čeka na dostavu?", a: "Dostava za Srbiju obično traje 1-2 radna dana, dok je za Bosnu i Hercegovinu rok 3-4 radna dana od trenutka potvrde porudžbine." },
+    { q: "Da li vršite dostavu u druge zemlje?", a: "Trenutno vršimo dostavu samo na teritoriji Srbije i Bosne i Hercegovine. Planiramo proširenje na ostale zemlje regiona u skorijoj budućnosti." },
+    { q: "Šta ako nisam zadovoljan proizvodom?", a: "Vaše zadovoljstvo je naš prioritet. Ukoliko niste zadovoljni rezultatima, imate pravo na povraćaj novca u roku od 14 dana od dana prijema, bez obzira na to da li je proizvod otvoren ili korišćen. Dovoljno je da nas kontaktirate i mi ćemo Vam refundirati sredstva." }
 ];
 
 export const CONTACT_INFO = {
@@ -175,10 +134,10 @@ export const SCAN_PAGE_CONTENT = {
 };
 
 export const NAV_LINKS = [
-    {href: "#shop", label: "Prodavnica"},
-    {href: "#philosophy", label: "Filozofija"},
-    {href: "#faq", label: "FAQ"},
-    {href: "#contact", label: "Kontakt"}
+    { href: "#shop", label: "Prodavnica" },
+    { href: "#philosophy", label: "Filozofija" },
+    { href: "#faq", label: "FAQ" },
+    { href: "#contact", label: "Kontakt" }
 ];
 
 export const PRODUCTS_SECTION_CONTENT = {
@@ -188,7 +147,7 @@ export const PRODUCTS_SECTION_CONTENT = {
 
 export const RESULTS_CONTENT = {
     title: "Vidljive transformacije",
-    image: "/images/medeiva/medeiva_natural.png"
+    image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=800"
 };
 
 export const FAQ_CONTENT = {
@@ -204,9 +163,9 @@ export const FOOTER_CONTENT = {
     contactTitle: "Kontakt",
     copyright: "Sva prava zadržana.",
     legalLinks: [
-        {type: "privacy", label: "Politika privatnosti"},
-        {type: "terms", label: "Uslovi korišćenja"},
-        {type: "shipping", label: "Isporuka i povraćaj"}
+        { type: "privacy", label: "Politika privatnosti" },
+        { type: "terms", label: "Uslovi korišćenja" },
+        { type: "shipping", label: "Isporuka i povraćaj" }
     ]
 };
 
@@ -216,24 +175,37 @@ export const COMPARISON_CONTENT = {
     medeiva: {
         title: "Medeiva rešenja",
         items: [
-            {title: "100% Prirodna baza", desc: "Bez mineralnih ulja, parabena i veštačkih mirisa."},
-            {title: "Hladna ekstrakcija", desc: "Čuvamo sve lekovite molekule biljaka."},
-            {title: "Dugotrajni rezultati", desc: "Fokusiramo se na regeneraciju, ne samo na maskiranje simptoma."}
+            { title: "100% Prirodna baza", desc: "Bez mineralnih ulja, parabena i veštačkih mirisa." },
+            { title: "Hladna ekstrakcija", desc: "Čuvamo sve lekovite molekule biljaka." },
+            { title: "Dugotrajni rezultati", desc: "Fokusiramo se na regeneraciju, ne samo na maskiranje simptoma." }
         ]
     },
     standard: {
         title: "Standardni proizvodi",
         items: [
-            {title: "Sintetički sastojci", desc: "Često sadrže agresivne konzervanse i baze."},
-            {title: "Masovna proizvodnja", desc: "Brza obrada na visokim temperaturama gubi lekovitost."},
-            {title: "Trenutno olakšanje", desc: "Simptomi se često vraćaju čim prestanete sa upotrebom."}
+            { title: "Sintetički sastojci", desc: "Često sadrže agresivne konzervanse i baze." },
+            { title: "Masovna proizvodnja", desc: "Brza obrada na visokim temperaturama gubi lekovitost." },
+            { title: "Trenutno olakšanje", desc: "Simptomi se često vraćaju čim prestanete sa upotrebom." }
         ]
     }
 };
 
 export const TRUST_BAR_ITEMS = [
-    {title: "Plaćanje pouzećem", icon: CheckCircle2},
-    {title: "100% Prirodni sastojci", icon: Sparkles},
-    {title: "Brza dostava (1-3 dana)", icon: Droplets},
-    {title: "Eko-prijateljska pakovanja", icon: Leaf}
+    { title: "Plaćanje pouzećem", icon: CheckCircle2 },
+    { title: "100% Prirodni sastojci", icon: Sparkles },
+    { title: "Brza dostava (1-3 dana)", icon: Droplets },
+    { title: "Eko-prijateljska pakovanja", icon: Leaf }
 ];
+
+export const MODAL_CONTENT = {
+    orderNow: "Naruči odmah",
+    backToDetails: "Nazad na detalje",
+    completeOrder: "Kompletirajte porudžbinu",
+    thanksTitle: "Hvala Vam na poverenju!",
+    deliveryDetails: "Detalji isporuke",
+    close: "Zatvori",
+    selectBundle: "Izaberite paket (Uštedite više)",
+    confirmOrder: "Potvrdi porudžbinu",
+    processing: "Obrađuje se...",
+    error: "Došlo je do greške prilikom slanja porudžbine. Molimo pokušajte ponovo."
+};

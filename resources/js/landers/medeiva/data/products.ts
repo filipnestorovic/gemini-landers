@@ -14,7 +14,7 @@ export interface Product {
 
 export const products: Product[] = [
     {
-        id: "anti-tinnitus-spray",
+        id: "23-ANTITINNITUS",
         name: "Anti Tinnitus Sprej",
         price: 1990,
         description: "Otkrijte prirodno rešenje za miran san i tišinu koju zaslužujete. Naš Anti Tinnitus sprej je pažljivo formulisan spoj najmoćnijih biljnih ekstrakata koji ciljano deluju na neprijatno zujanje, pritisak i iritacije u ušima. Bez agresivnih hemikalija, ovaj preparat nežno čisti ušni kanal, smanjuje upalne procese i vraća vam osećaj lakoće. Idealno za sve koji traže dugotrajno olakšanje od tinitusa na potpuno prirodan način.",
@@ -39,7 +39,7 @@ export const products: Product[] = [
         warning: "Samo za spoljašnju upotrebu. Ne koristiti na oštećenoj ili inficiranoj koži. Osobe preosetljive na bilo koji sastojak moraju izbegavati upotrebu ovog preparata."
     },
     {
-        id: "nail-repair-serum",
+        id: "18-NAILREPAIR",
         name: "Nail Repair Serum",
         price: 1990,
         description: "Povratite zdravlje i prirodni sjaj vašim noktima uz naš intenzivni Nail Repair serum. Specijalno dizajniran za borbu protiv upornih gljivičnih infekcija i oštećenja, ovaj serum prodire duboko u strukturu nokta, pružajući mu neophodnu zaštitu i regeneraciju. Kombinacija čajevca, hrastove kore i timijana stvara neprobojan štit koji sprečava dalje širenje infekcije, dok istovremeno neguje zanoktice i jača nokatnu ploču.",

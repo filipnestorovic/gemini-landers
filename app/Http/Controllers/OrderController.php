@@ -17,7 +17,7 @@ class OrderController extends Controller
             'quantity'         => 'required|integer|min:1',
             'price'            => 'required|numeric',
             'country'              => 'required|string',
-
+            'domain'              => 'nullable|string',
             // Podaci o kupcu
             'name'             => 'required|string|max:255',
             'phone' => ['required', 'string', 'regex:/^((\+381)|(00381)|(0))[0-9]{8,10}$/'],
@@ -40,14 +40,19 @@ class OrderController extends Controller
 
             $jsonArray = array();
 
-            $divineProducts = ['18-NAILREPAIR'];
+            $divineProducts = ['18-NAILREPAIR', '23-ANTITINNITUS'];
             $homeProducts = ['11-SCRATCHREPAIR','31-PESTREJECT'];
 
-            if(in_array($request->sku, $divineProducts)) {
-                $site = 'https://divinecareshop.com';
-            } elseif(in_array($request->sku, $homeProducts)) {
-                $site = 'https://homecarshop.com';
+            if(isset($request->domain)) {
+                $site = 'https://'.$request->domain;
+            } else {
+                if(in_array($request->sku, $divineProducts)) {
+                    $site = 'https://divinecareshop.com';
+                } elseif(in_array($request->sku, $homeProducts)) {
+                    $site = 'https://homecarshop.com';
+                }
             }
+
 
             $jsonArray['site'] = $site;
 

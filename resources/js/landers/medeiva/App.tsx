@@ -129,6 +129,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
         payload.append('totalPrice', totalPrice.toString());
         payload.append('freeShipping', selectedBundle.freeShipping.toString());
         payload.append('country', PRODUCT_SETTINGS.country);
+        payload.append('domain', window.location.hostname);
 
         try {
             const response = await fetch(targetRoute, {
@@ -171,7 +172,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                     className="bg-brand-cream w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-3xl shadow-2xl flex flex-col md:flex-row"
                     onClick={e => e.stopPropagation()}
                 >
-                    <div className="w-full md:w-1/2 aspect-square md:h-auto relative bg-zinc-100 flex flex-col">
+                    <div className="hidden md:flex w-full md:w-1/2 aspect-square md:h-auto relative bg-zinc-100 flex-col">
                         <div className="flex-grow relative overflow-hidden">
                             <AnimatePresence mode="wait">
                                 <motion.img
@@ -220,7 +221,24 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                         </button>
                     </div>
 
-                    <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto">
+                    <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto relative">
+                        <div className="flex md:hidden justify-between items-center mb-6">
+                            <button
+                                onClick={onClose}
+                                className="bg-zinc-100 p-2 rounded-full"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                            {!isOrdering && (
+                                <button
+                                    onClick={() => setIsOrdering(true)}
+                                    className="bg-brand-olive text-white px-6 py-2 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-lg shadow-brand-olive/20"
+                                >
+                                    {CONSTANTS.MODAL_CONTENT.orderNow}
+                                </button>
+                            )}
+                        </div>
+
                         <div className="hidden md:flex justify-end mb-4">
                             <button onClick={onClose} className="hover:rotate-90 transition-transform">
                                 <X className="w-6 h-6" />
@@ -278,7 +296,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                                     onClick={() => setIsOrdering(true)}
                                     className="w-full bg-brand-olive text-white py-4 rounded-full uppercase tracking-widest text-sm font-bold hover:bg-zinc-800 transition-all shadow-lg shadow-brand-olive/20"
                                 >
-                                    Naruči odmah
+                                    {CONSTANTS.MODAL_CONTENT.orderNow}
                                 </button>
                             </motion.div>
                         ) : (
@@ -287,23 +305,23 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                                     onClick={() => setIsOrdering(false)}
                                     className="text-xs uppercase tracking-widest font-bold mb-6 flex items-center gap-2 hover:text-brand-olive"
                                 >
-                                    <ArrowRight className="w-4 h-4 rotate-180" /> Nazad na detalje
+                                    <ArrowRight className="w-4 h-4 rotate-180" /> {CONSTANTS.MODAL_CONTENT.backToDetails}
                                 </button>
 
-                                <h3 className="text-3xl font-serif mb-8">Kompletirajte porudžbinu</h3>
+                                <h3 className="text-3xl font-serif mb-8">{CONSTANTS.MODAL_CONTENT.completeOrder}</h3>
 
                                 {orderStatus === 'success' ? (
                                     <div className="text-center py-16 px-4">
                                         <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
                                             <CheckCircle2 className="w-10 h-10 text-emerald-600" />
                                         </div>
-                                        <h4 className="text-3xl font-serif mb-4">Hvala Vam na poverenju!</h4>
+                                        <h4 className="text-3xl font-serif mb-4">{CONSTANTS.MODAL_CONTENT.thanksTitle}</h4>
                                         <p className="text-zinc-600 mb-8 leading-relaxed">
                                             Vaša porudžbina za <strong>{product.name}</strong> je uspešno primljena.<br/>
                                             Uskoro ćemo Vas kontaktirati radi potvrde isporuke.
                                         </p>
                                         <div className="bg-zinc-50 p-6 rounded-2xl text-left mb-8 border border-zinc-100">
-                                            <p className="text-[10px] uppercase tracking-widest font-bold text-zinc-400 mb-4">Detalji isporuke</p>
+                                            <p className="text-[10px] uppercase tracking-widest font-bold text-zinc-400 mb-4">{CONSTANTS.MODAL_CONTENT.deliveryDetails}</p>
                                             <p className="text-sm font-medium mb-1">{formData.name}</p>
                                             <p className="text-sm text-zinc-500 mb-1">{formData.phone}</p>
                                             <p className="text-sm text-zinc-500">{formData.shipping_address}, {formData.shipping_city}</p>
@@ -312,13 +330,13 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                                             onClick={onClose}
                                             className="w-full bg-brand-olive text-white py-4 rounded-full uppercase tracking-widest text-sm font-bold hover:bg-zinc-800 transition-all"
                                         >
-                                            Zatvori
+                                            {CONSTANTS.MODAL_CONTENT.close}
                                         </button>
                                     </div>
                                 ) : (
                                     <form onSubmit={handleSubmit} className="space-y-4">
                                         <div className="mb-8">
-                                            <label className="text-[10px] uppercase tracking-widest font-bold block mb-4">Izaberite paket (Uštedite više)</label>
+                                            <label className="text-[10px] uppercase tracking-widest font-bold block mb-4">{CONSTANTS.MODAL_CONTENT.selectBundle}</label>
                                             <div className="grid grid-cols-1 gap-3">
                                                 <button
                                                     type="button"
@@ -463,7 +481,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                                         {orderStatus === 'error' && (
                                             <div className="flex items-center gap-2 text-red-500 text-xs bg-red-50 p-3 rounded-xl">
                                                 <AlertCircle className="w-4 h-4" />
-                                                <span>Došlo je do greške prilikom slanja porudžbine. Molimo pokušajte ponovo.</span>
+                                                <span>{CONSTANTS.MODAL_CONTENT.error}</span>
                                             </div>
                                         )}
 
@@ -472,7 +490,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
                                             type="submit"
                                             className="w-full bg-brand-olive text-white py-4 rounded-full uppercase tracking-widest text-sm font-bold hover:bg-zinc-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-6"
                                         >
-                                            {orderStatus === 'loading' ? 'Obrađuje se...' : 'Potvrdi porudžbinu'}
+                                            {orderStatus === 'loading' ? CONSTANTS.MODAL_CONTENT.processing : CONSTANTS.MODAL_CONTENT.confirmOrder}
                                         </button>
 
                                         <div className="grid grid-cols-3 gap-2 border-t border-zinc-100 pt-6">
@@ -529,7 +547,7 @@ const Hero = () => {
                 <img
                     src={CONSTANTS.HERO_CONTENT.image}
                     alt="Natural botanical background"
-                    className="w-full h-full object-cover opacity-50"
+                    className="w-full h-full object-cover opacity-60"
                     referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-brand-cream/60 via-transparent to-brand-cream"></div>
