@@ -6,7 +6,7 @@ export const HERO_CONTENT = {
     title: "Prirodna formula.",
     subtitle: "Vidljivi rezultati.",
     description: "Medeiva spaja čistotu botaničkih ekstrakata sa naprednom naukom kako bi pružila ciljana rešenja za vaše zdravlje i negu.",
-    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=1920",
+    image: "/images/medeiva/medeiva_hero.webp",
     ctaPrimary: "Istražite kolekciju",
     ctaSecondary: "Naša priča"
 };

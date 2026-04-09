@@ -930,9 +930,6 @@ const Footer = ({ onLegalClick }: { onLegalClick: (type: string) => void }) => {
                         <a href={CONSTANTS.CONTACT_INFO.socials.facebook} target="_blank" rel="noreferrer">
                             <Facebook className="w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors" />
                         </a>
-                        <a href={CONSTANTS.CONTACT_INFO.socials.twitter} target="_blank" rel="noreferrer">
-                            <Twitter className="w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors" />
-                        </a>
                     </div>
                     <p className="text-white/50 text-sm font-light">
                         {CONSTANTS.CONTACT_INFO.email}
