@@ -99,6 +99,7 @@ POVRAĆAJ:
 export const REGION_SETTINGS = {
     RS: {
         name: "Srbija",
+        code: "RS",
         currency: "RSD",
         shippingCost: 500,
         shippingDays: "1-2 radna dana",
@@ -110,6 +111,7 @@ export const REGION_SETTINGS = {
     },
     BA: {
         name: "Bosna i Hercegovina",
+        code: "BA",
         currency: "KM",
         shippingCost: 13,
         shippingDays: "3-4 radna dana",

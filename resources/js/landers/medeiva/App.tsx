@@ -114,7 +114,7 @@ const ProductModal = ({ product, onClose, region, hasScanDiscount }: { product: 
 
         const PRODUCT_SETTINGS = {
             sku: product.id,
-            country: regionSettings.name
+            country: regionSettings.code
         };
 
         const payload = new FormData();
